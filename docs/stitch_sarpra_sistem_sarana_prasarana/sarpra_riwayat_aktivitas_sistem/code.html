@@ -1,0 +1,695 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_dashboard" name="shell-type">
+<title>SARPRA - Riwayat Aktivitas Sistem (Audit Trail)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#022448',
+            'primary-container': '#1E3A5F',
+            'on-primary': '#FFFFFF',
+            'on-primary-container': '#8AA4CF',
+            secondary: '#515F74',
+            'secondary-container': '#D5E3FC',
+            'on-secondary-container': '#57657A',
+            surface: '#F8FAFC',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container-low': '#F1F5F9',
+            'surface-container': '#E2E8F0',
+            'surface-container-high': '#CBD5E1',
+            'on-surface': '#0F172A',
+            'on-surface-variant': '#475569',
+            outline: '#94A3B8',
+            'outline-variant': '#E2E8F0',
+            success: '#059669',
+            'success-bg': '#ECFDF5',
+            'success-text': '#047857',
+            warning: '#D97706',
+            'warning-bg': '#FFFBEB',
+            'warning-text': '#B45309',
+            danger: '#DC2626',
+            'danger-bg': '#FEF2F2',
+            'danger-text': '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-surface antialiased flex min-h-screen">
+<!-- SIDEBAR PERSISTEN (260px) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-primary-container z-50 flex flex-col justify-between shadow-lg text-white">
+<div class="flex flex-col">
+<!-- Logo & Brand Header -->
+<div class="h-16 px-6 flex items-center gap-3 border-b border-[#2d4d7a]/50">
+<img alt="SARPRA Logo" class="w-8 h-8 rounded-lg object-contain shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWuSsIW90C8IrRsEnI0zM--Lj-YLfw5Kns1NQ8ugKG0fpmAqKKZnNZC1XIXSAp1lvlv3ywkAWYYZvtAg1QufirV6-0cnRg5DxmPJHGr2sVDVCO4gsXy_ljE225RiIdp2b0TvRtdl-vVo6c8qMvHCnI1BgvuKDU3eGhx_jtY0Hn__jhUF2NyFomqGmfSSR2G6pmDL_29ucZN8dqOse-OCbDH5HQaJ7rupeMZSideV3PjbWRTJS8Y8u8u9r65D4U3nxyQ">
+<div class="flex flex-col">
+<span class="font-extrabold text-lg text-white tracking-tight leading-none">SARPRA</span>
+<span class="text-[11px] font-semibold text-[#8AA4CF] tracking-wider uppercase mt-1">Asset &amp; Infra</span>
+</div>
+</div>
+<!-- Menu Category Label -->
+<div class="px-6 pt-6 pb-2">
+<span class="text-[11px] font-bold text-[#8AA4CF] uppercase tracking-wider">Modul Operasional</span>
+</div>
+<!-- Nav Items -->
+<nav class="flex flex-col gap-1 px-3"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="text-sm">Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="text-sm">Manajemen Pengguna</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="text-sm">Data Master</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#022448] text-white font-bold shadow-sm transition-all font-semibold" data-path="riwayat-aktivitas" href="#" id="nav-riwayat"><span class="material-symbols-outlined text-[20px] text-white">history</span><span class="text-sm">Riwayat Aktivitas</span></a></nav>
+</div>
+<!-- System Badge / Footer -->
+<div class="p-4 mx-3 mb-4 rounded-xl bg-[#022448]/80 border border-[#2c4e78]">
+<div class="flex items-center gap-2 mb-1.5">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+<span class="text-xs text-white font-bold tracking-tight">SARPRA v1.0</span>
+</div>
+<p class="text-[11px] text-[#8AA4CF] leading-relaxed">Sistem Pengelolaan Sarana dan Prasarana Terpadu</p>
+</div>
+</aside>
+<!-- MAIN AREA (Offset by 256px for sidebar) -->
+<div class="pl-64 flex-1 flex flex-col min-w-0">
+<!-- TOP HEADER BAR -->
+<header class="sticky top-0 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-8 border-b border-surface-container shadow-sm">
+<div class="flex items-center gap-3">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-xs font-medium text-secondary"><span class="font-bold text-primary">SARPRA</span><span class="text-outline">/</span><span class="text-on-surface-variant font-medium">Administrator</span><span class="text-outline">/</span><span class="text-primary font-bold bg-secondary-container/60 px-2 py-0.5 rounded">Riwayat Aktivitas</span></nav>
+</div>
+<div class="flex items-center gap-5">
+<!-- Global Search Bar -->
+
+<!-- Notification & Help Buttons -->
+<div class="flex items-center gap-1 border-r border-surface-container pr-4">
+<button aria-label="Notifications" class="relative p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-white font-mono text-[9px] font-bold">3</span>
+</button>
+<button aria-label="Help" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+</div>
+<!-- Admin Profile Profile -->
+<div class="flex items-center gap-3 cursor-pointer group">
+<img alt="Ahmad Fauzi" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHn5YhK0aDLnQ5dsfgmxIQcqUSJjvErPNtTbqxCuDelTWiMXCQRhmnb7iQwDo3Z1eblNNDBtJygr5g-9C4R0OFj_eVZhzRJ0YKaeV_Ipzx93xIUMLPtDnXtQkxqVw1_7RCx0DjcaV-x2E09TLonl2HSLN6K4CzZ6Nxr_wxo7ImIEWmyslSWvy3vUzqQqgtOCk7ZirNxaKoroMGarGUoyILNoyrwM9EPHSyZK9afvW2TqxgTqHCnQVQV11Ls9tM1XVjTA">
+<div class="flex flex-col text-left">
+<span class="text-xs font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">Ahmad Fauzi, S.Kom</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-mono text-[10px] font-semibold">Administrator Utama</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">keyboard_arrow_down</span>
+</div>
+</div>
+</header>
+<!-- CONTENT WRAPPER -->
+<main class="w-full px-8 py-7 flex flex-col gap-6"><!-- TAB HEADER CONTROLLER -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-surface-container"><div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded bg-primary-container/10 text-primary-container text-xs font-bold tracking-wide uppercase">Konsol Administrator</span>
+<span class="text-xs text-outline">•</span>
+<span class="text-xs text-secondary font-medium">Pusat Pengaturan &amp; Audit Trail</span>
+</div>
+<h1 class="text-2xl font-extrabold text-on-surface tracking-tight" id="page-title-heading">Riwayat Aktivitas Sistem</h1>
+<p class="text-sm text-secondary mt-0.5" id="page-title-desc">Catatan log audit autentikasi, mutasi aset, persetujuan pejabat, dan riwayat keamanan.</p>
+</div>
+<div class="inline-flex p-1 bg-surface-container-low border border-surface-container rounded-xl self-start md:self-auto">
+
+
+</div></div>
+<!-- SECTION 1: KONFIGURASI SISTEM (TAB 1) -->
+
+<!-- SECTION 2: RIWAYAT AKTIVITAS SISTEM (TAB 2) -->
+<div class="flex flex-col gap-6" id="section-audit">
+<!-- 4 SUMMARY METRIC CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-center justify-between">
+<div>
+<p class="text-xs text-secondary font-medium">Total Log Audit</p>
+<p class="text-2xl font-extrabold text-on-surface mt-1">1.428</p>
+<span class="text-[11px] text-secondary">Tersimpan permanen</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-secondary-container/60 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">storage</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-center justify-between">
+<div>
+<p class="text-xs text-secondary font-medium">Aktivitas Hari Ini</p>
+<p class="text-2xl font-extrabold text-on-surface mt-1">86</p>
+<span class="text-[11px] text-emerald-700 font-semibold">+12 sejak pagi</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700">
+<span class="material-symbols-outlined text-[24px]">today</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-center justify-between">
+<div>
+<p class="text-xs text-secondary font-medium">Perubahan</p>
+<p class="text-2xl font-extrabold text-on-surface mt-1">42</p>
+<span class="text-[11px] text-amber-700 font-semibold">Inventaris &amp; master</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700">
+<span class="material-symbols-outlined text-[24px]">edit_note</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-center justify-between">
+<div>
+<p class="text-xs text-secondary font-medium">Otorisasi &amp; Persetujuan</p>
+<p class="text-2xl font-extrabold text-on-surface mt-1">18</p>
+<span class="text-[11px] text-primary font-semibold">Tindakan pimpinan</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">approval_delegation</span>
+</div>
+</div></div>
+<!-- FILTER & SEARCH BAR -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl p-4 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3"><div class="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center gap-3">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-3 top-2 text-[18px] text-secondary pointer-events-none">search</span>
+<input class="w-full h-9 pl-9 pr-4 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" id="audit-search-input" placeholder="Cari nama pengguna, NIP, IP address, atau kata kunci..." type="text">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+<div class="w-full sm:w-44">
+<select class="w-full h-9 px-3 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none" id="audit-filter-module">
+<option value="all">Semua Modul</option>
+<option value="Inventaris">Modul Inventaris</option>
+<option value="Perencanaan">Modul Perencanaan</option>
+<option value="Pemeliharaan">Modul Pemeliharaan</option>
+<option value="Pengguna">Modul Pengguna</option>
+<option value="Konfigurasi">Modul Konfigurasi</option>
+<option value="Master Data">Modul Master Data</option>
+</select>
+</div>
+<div class="w-full sm:w-36">
+<select class="w-full h-9 px-3 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none" id="audit-filter-action">
+<option value="all">Semua Aksi</option>
+<option value="Login">Login</option>
+<option value="Tambah">Tambah</option>
+<option value="Ubah">Ubah</option>
+<option value="Hapus">Hapus</option>
+<option value="Setujui">Setujui</option>
+</select>
+</div>
+<div class="w-full sm:w-40">
+<select class="w-full h-9 px-3 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none" id="audit-filter-date">
+<option value="all">Semua Waktu</option>
+<option selected="" value="today">Hari Ini</option>
+<option value="7d">7 Hari Terakhir</option>
+<option value="30d">30 Hari Terakhir</option>
+<option value="custom">Kustom</option>
+</select>
+</div>
+</div>
+<button class="h-9 px-3 bg-surface-container-low hover:bg-surface-container border border-surface-container rounded-lg text-xs font-semibold text-secondary hover:text-primary flex items-center justify-center gap-1 transition-colors" id="btn-reset-filter" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span class="">Reset Filter</span>
+</button>
+</div>
+<div class="flex items-center gap-2 justify-end border-t lg:border-t-0 pt-3 lg:pt-0 border-surface-container">
+<button class="h-9 px-3 bg-surface-container-low hover:bg-surface-container border border-surface-container rounded-lg text-xs font-semibold text-secondary hover:text-primary flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="">Ekspor Excel / CSV</span>
+</button>
+<button class="h-9 px-3 bg-primary-container text-white hover:bg-[#152a45] rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span class="">Cetak Laporan Audit PDF</span>
+</button>
+</div></div>
+<!-- AUDIT LOG DATA TABLE CONTAINER -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl shadow-xs overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-container text-[11px] font-bold text-secondary uppercase tracking-wider">
+<th class="py-3 px-4">Waktu &amp; Tanggal</th>
+<th class="py-3 px-4">Nama Pengguna</th>
+<th class="py-3 px-4">Peran</th>
+<th class="py-3 px-4">Modul Domain</th>
+<th class="py-3 px-4 text-center">Aksi</th>
+<th class="py-3 px-4">Keterangan Detail Aktivitas</th>
+<th class="py-3 px-4 text-center">Inspeksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-xs" id="audit-table-body"><!-- ROW 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Ubah" data-module="Konfigurasi">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 09:42:15 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-[10px]">AF</div>
+<div>
+<p class="font-bold text-on-surface">Ahmad Fauzi, S.Kom</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 198504122008011003</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-primary text-[10px] font-bold">Administrator</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Konfigurasi Sistem</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">Ubah</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Memperbarui konfigurasi SMTP Relay dan kuota unggah berkas</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.45 • Entitas: Config-Global</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Setujui" data-module="Inventaris">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 09:15:30 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-secondary text-white font-bold flex items-center justify-center text-[10px]">HS</div>
+<div>
+<p class="font-bold text-on-surface">Dr. Ir. H. Hendra Setiawan, M.T.</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 197205181997031001</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold">Pimpinan / PPK</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Modul Persetujuan</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Setujui</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Menyetujui usulan pengadaan 5 unit Laptop Workstation (PPK-2025-089)</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.12.11 • Nilai: Rp 125.000.000</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Tambah" data-module="Inventaris">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:52:10 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">SR</div>
+<div>
+<p class="font-bold text-on-surface">Siti Rahmawati, S.T.</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 199308142018022002</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">Pengelola Sarpra</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Modul Inventaris</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Tambah</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Menambahkan barang inventaris baru: Proyektor Laser Epson R.302 (INV-ELK-2025-042)</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.88 • Lokasi: R. Rapat Lt. 3</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Ubah" data-module="Pemeliharaan">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:44:05 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-slate-600 text-white font-bold flex items-center justify-center text-[10px]">BS</div>
+<div>
+<p class="font-bold text-on-surface">Budi Santoso</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 198902172014031005</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">Pengelola Sarpra</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Modul Pemeliharaan</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">Ubah</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Memperbarui status tiket pemeliharaan genset ruang utilitas menjadi 'Selesai'</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.92 • No. Tiket: TIK-ML-2025-019</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Tambah" data-module="Pengguna">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:35:50 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-[10px]">AF</div>
+<div>
+<p class="font-bold text-on-surface">Ahmad Fauzi, S.Kom</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 198504122008011003</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-primary text-[10px] font-bold">Administrator</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Manajemen Pengguna</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">Tambah</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Mendaftarkan akun Pengelola Sarpra baru: andi.pratama@sarpra.go.id</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.45 • Hak Akses: Level 2 Unit Kerja</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 6 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Login" data-module="Autentikasi">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:28:14 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-secondary text-white font-bold flex items-center justify-center text-[10px]">RD</div>
+<div>
+<p class="font-bold text-on-surface">Ratna Dewi, S.E.</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 199011242015032003</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">Pengelola Sarpra</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Autentikasi Sistem</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[10px] font-bold">Login</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Otentikasi berhasil via Single Sign-On (SSO Komdigi)</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.14.20 • Session: #SSO-9912c</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 7 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Ubah" data-module="Perencanaan">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:12:44 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">DP</div>
+<div>
+<p class="font-bold text-on-surface">Diana Prasetyo, S.Sos</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 199404282019012004</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">Pengelola Sarpra</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Modul Perencanaan</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-bold">Ubah</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Mengajukan revisi Rencana Anggaran Biaya (RAB) pengadaan AC Split Lab</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.77 • Ref: RAB-REV-2025-014</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- ROW 8 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors audit-row" data-action="Hapus" data-module="Master Data">
+<td class="py-3.5 px-4 font-mono text-[11px] text-secondary whitespace-nowrap">24 Okt 2025, 08:02:18 WIB</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-[10px]">AF</div>
+<div>
+<p class="font-bold text-on-surface">Ahmad Fauzi, S.Kom</p>
+<p class="text-[11px] text-secondary font-mono">NIP. 198504122008011003</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-primary text-[10px] font-bold">Administrator</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary text-[10px] font-medium">Data Master</span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<span class="px-2 py-0.5 rounded bg-red-100 text-red-700 text-[10px] font-bold">Hapus</span>
+</td>
+<td class="py-3.5 px-4">
+<p class="text-on-surface font-medium">Menghapus kategori arsip nonaktif KTG-ARS-08 dari repositori master</p>
+<p class="text-[11px] text-secondary font-mono mt-0.5">IP: 192.168.10.45 • Otorisasi Admin Master</p>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="p-1 text-secondary hover:text-primary hover:bg-surface-container rounded transition-colors" title="Detail Log" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr></tbody>
+</table>
+</div>
+<!-- PAGINATION BAR -->
+<div class="p-4 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-secondary"><div class="flex items-center gap-2">
+<span class="">Menampilkan <span class="font-bold text-on-surface">1 - 8</span> dari <span class="font-bold text-on-surface">1.428</span> rekaman audit</span>
+<span class="text-outline">|</span>
+<div class="flex items-center gap-1.5">
+<span class="">Baris per halaman:</span>
+<select class="h-7 px-2 bg-surface-container-low border border-surface-container rounded text-xs text-on-surface font-medium focus:outline-none">
+<option selected="">10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 h-8 rounded border border-surface-container flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-low transition-colors disabled:opacity-40 gap-1" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="text-xs font-medium">Sebelumnya</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-white font-bold flex items-center justify-center text-xs" type="button">1</button>
+<button class="w-8 h-8 rounded border border-surface-container text-secondary hover:text-primary hover:bg-surface-container-low flex items-center justify-center text-xs" type="button">2</button>
+<button class="w-8 h-8 rounded border border-surface-container text-secondary hover:text-primary hover:bg-surface-container-low flex items-center justify-center text-xs" type="button">3</button>
+<span class="px-1 text-secondary">...</span>
+<button class="w-8 h-8 rounded border border-surface-container text-secondary hover:text-primary hover:bg-surface-container-low flex items-center justify-center text-xs" type="button">179</button>
+<button class="px-2.5 h-8 rounded border border-surface-container flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-low transition-colors gap-1" type="button">
+<span class="text-xs font-medium">Berikutnya</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div></div>
+</div>
+</div>
+<!-- FOOTER -->
+<footer class="pt-5 pb-2 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-secondary text-xs">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary">SARPRA</span>
+<span class="">•</span>
+<span class="">Sistem Terpadu Pengelolaan Sarana dan Prasarana</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Operasional Aktif</span>
+<span class="">•</span>
+<span class="">Hak Cipta © 2025</span>
+</div>
+</footer></main>
+</div>
+<script>
+    (function() {
+      const filterButtons = document.querySelectorAll('#time-filter-group .filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+            b.classList.add('text-secondary', 'font-medium');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+          btn.classList.remove('text-secondary', 'font-medium');
+        });
+      });
+
+      const refreshBtn = document.getElementById('refresh-data-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshBtn && refreshIcon) {
+        refreshBtn.addEventListener('click', () => {
+          refreshIcon.classList.add('rotate-180');
+          refreshBtn.classList.add('opacity-75');
+          setTimeout(() => {
+            refreshIcon.classList.remove('rotate-180');
+            refreshBtn.classList.remove('opacity-75');
+          }, 500);
+        });
+      }
+    })();
+  </script>
+<script id="admin-module-interactive-script">
+  (function() {
+    const btnConfig = document.getElementById('btn-tab-config');
+    const btnAudit = document.getElementById('btn-tab-audit');
+    const secConfig = document.getElementById('section-config');
+    const secAudit = document.getElementById('section-audit');
+    const heading = document.getElementById('page-title-heading');
+    const desc = document.getElementById('page-title-desc');
+    const navConfig = document.getElementById('nav-konfigurasi');
+    const navAudit = document.getElementById('nav-riwayat');
+
+    function switchToConfig() {
+      if (!btnConfig || !btnAudit || !secConfig || !secAudit) return;
+      btnConfig.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold bg-surface-container-lowest text-primary shadow-xs transition-all';
+      btnAudit.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-secondary hover:text-primary transition-all';
+      secConfig.classList.remove('hidden');
+      secAudit.classList.add('hidden');
+      if (heading) heading.textContent = 'Konfigurasi Sistem';
+      if (desc) desc.textContent = 'Kelola parameter global kelembagaan, batasan kuota berkas, dan layanan notifikasi terpadu.';
+      if (navConfig && navAudit) {
+        navConfig.classList.add('bg-[#022448]', 'text-white', 'font-semibold');
+        navConfig.classList.remove('text-[#BACAE3]');
+        navAudit.classList.remove('bg-[#022448]', 'text-white', 'font-semibold');
+        navAudit.classList.add('text-[#BACAE3]');
+      }
+    }
+
+    function switchToAudit() {
+      if (!btnConfig || !btnAudit || !secConfig || !secAudit) return;
+      btnAudit.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold bg-surface-container-lowest text-primary shadow-xs transition-all';
+      btnConfig.className = 'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-secondary hover:text-primary transition-all';
+      secAudit.classList.remove('hidden');
+      secConfig.classList.add('hidden');
+      if (heading) heading.textContent = 'Riwayat Aktivitas Sistem';
+      if (desc) desc.textContent = 'Catatan log audit autentikasi, mutasi aset, persetujuan pejabat, dan riwayat keamanan.';
+      if (navConfig && navAudit) {
+        navAudit.classList.add('bg-[#022448]', 'text-white', 'font-semibold');
+        navAudit.classList.remove('text-[#BACAE3]');
+        navConfig.classList.remove('bg-[#022448]', 'text-white', 'font-semibold');
+        navConfig.classList.add('text-[#BACAE3]');
+      }
+    }
+
+    if (btnConfig) btnConfig.addEventListener('click', switchToConfig);
+    if (btnAudit) btnAudit.addEventListener('click', switchToAudit);
+    if (navConfig) navConfig.addEventListener('click', function(e) { e.preventDefault(); switchToConfig(); });
+    if (navAudit) navAudit.addEventListener('click', function(e) { e.preventDefault(); switchToAudit(); });
+
+    // Search & Filter for Table
+    const searchInput = document.getElementById('audit-search-input');
+    const filterAction = document.getElementById('audit-filter-action');
+    const filterRole = document.getElementById('audit-filter-role');
+    const rows = document.querySelectorAll('.audit-row');
+
+    function filterTable() {
+      const searchVal = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      const actionVal = filterAction ? filterAction.value : 'all';
+      const roleVal = filterRole ? filterRole.value : 'all';
+
+      rows.forEach(row => {
+        const rowAction = row.getAttribute('data-action') || '';
+        const rowRole = row.getAttribute('data-role') || '';
+        const rowKeyword = (row.getAttribute('data-keyword') || '') + ' ' + row.innerText.toLowerCase();
+
+        const matchesSearch = !searchVal || rowKeyword.includes(searchVal);
+        const matchesAction = actionVal === 'all' || rowAction === actionVal;
+        const matchesRole = roleVal === 'all' || rowRole === roleVal;
+
+        if (matchesSearch && matchesAction && matchesRole) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    if (searchInput) searchInput.addEventListener('input', filterTable);
+    if (filterAction) filterAction.addEventListener('change', filterTable);
+    if (filterRole) filterRole.addEventListener('change', filterTable);
+
+    // Save button toast feedback
+    const saveBtn = document.getElementById('save-config-btn');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function() {
+        const originalText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span><span>Tersimpan!</span>';
+        saveBtn.classList.remove('bg-primary-container');
+        saveBtn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          saveBtn.innerHTML = originalText;
+          saveBtn.classList.remove('bg-emerald-600');
+          saveBtn.classList.add('bg-primary-container');
+        }, 1800);
+      });
+    }
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+</body></html>

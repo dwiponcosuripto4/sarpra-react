@@ -1,0 +1,588 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>SARPRA - Dashboard Administratif Konsol Pusat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#022448',
+            'primary-container': '#1E3A5F',
+            'on-primary': '#FFFFFF',
+            'on-primary-container': '#8AA4CF',
+            secondary: '#515F74',
+            'secondary-container': '#D5E3FC',
+            'on-secondary-container': '#57657A',
+            surface: '#F8FAFC',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container-low': '#F1F5F9',
+            'surface-container': '#E2E8F0',
+            'surface-container-high': '#CBD5E1',
+            'on-surface': '#0F172A',
+            'on-surface-variant': '#475569',
+            outline: '#94A3B8',
+            'outline-variant': '#E2E8F0',
+            success: '#059669',
+            'success-bg': '#ECFDF5',
+            'success-text': '#047857',
+            warning: '#D97706',
+            'warning-bg': '#FFFBEB',
+            'warning-text': '#B45309',
+            danger: '#DC2626',
+            'danger-bg': '#FEF2F2',
+            'danger-text': '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-surface antialiased flex min-h-screen">
+
+  <!-- SIDEBAR PERSISTEN (260px) -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-primary-container z-50 flex flex-col justify-between shadow-lg text-white">
+    <div class="flex flex-col">
+      <!-- Logo & Brand Header -->
+      <div class="h-16 px-6 flex items-center gap-3 border-b border-[#2d4d7a]/50">
+        <img alt="SARPRA Logo" class="w-8 h-8 rounded-lg object-contain shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWuSsIW90C8IrRsEnI0zM--Lj-YLfw5Kns1NQ8ugKG0fpmAqKKZnNZC1XIXSAp1lvlv3ywkAWYYZvtAg1QufirV6-0cnRg5DxmPJHGr2sVDVCO4gsXy_ljE225RiIdp2b0TvRtdl-vVo6c8qMvHCnI1BgvuKDU3eGhx_jtY0Hn__jhUF2NyFomqGmfSSR2G6pmDL_29ucZN8dqOse-OCbDH5HQaJ7rupeMZSideV3PjbWRTJS8Y8u8u9r65D4U3nxyQ">
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg text-white tracking-tight leading-none">SARPRA</span>
+          <span class="text-[11px] font-semibold text-[#8AA4CF] tracking-wider uppercase mt-1">Asset &amp; Infra</span>
+        </div>
+      </div>
+
+      <!-- Menu Category Label -->
+      <div class="px-6 pt-6 pb-2">
+        <span class="text-[11px] font-bold text-[#8AA4CF] uppercase tracking-wider">Modul Operasional</span>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="flex flex-col gap-1 px-3">
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#022448] text-white font-semibold shadow-sm transition-all">
+          <span class="material-symbols-outlined text-[20px] text-white">grid_view</span>
+          <span class="text-sm">Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+          <span class="text-sm">Manajemen Pengguna</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+          <span class="text-sm">Data Master</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span class="text-sm">Konfigurasi Sistem</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all">
+          <span class="material-symbols-outlined text-[20px]">history</span>
+          <span class="text-sm">Riwayat Aktivitas</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- System Badge / Footer -->
+    <div class="p-4 mx-3 mb-4 rounded-xl bg-[#022448]/80 border border-[#2c4e78]">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs text-white font-bold tracking-tight">SARPRA v1.0</span>
+        
+      </div>
+      <p class="text-[11px] text-[#8AA4CF] leading-relaxed">Sistem Pengelolaan Sarana dan Prasarana Terpadu</p>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA (Offset by 256px for sidebar) -->
+  <div class="pl-64 flex-1 flex flex-col min-w-0">
+
+    <!-- TOP HEADER BAR -->
+    <header class="sticky top-0 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-8 border-b border-surface-container shadow-sm">
+      <div class="flex items-center gap-3">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs font-medium text-secondary">
+          <span class="font-bold text-primary">SARPRA</span>
+          <span class="text-outline">/</span>
+          <span class="text-on-surface-variant font-medium">Administrator</span>
+          <span class="text-outline">/</span>
+          <span class="text-primary font-bold bg-secondary-container/60 px-2 py-0.5 rounded">Dashboard</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <!-- Global Search Bar -->
+        
+
+        <!-- Notification & Help Buttons -->
+        <div class="flex items-center gap-1 border-r border-surface-container pr-4">
+          <button type="button" aria-label="Notifications" class="relative p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-white font-mono text-[9px] font-bold">3</span>
+          </button>
+          <button type="button" aria-label="Help" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">help_outline</span>
+          </button>
+        </div>
+
+        <!-- Admin Profile Profile -->
+        <div class="flex items-center gap-3 cursor-pointer group">
+          <img alt="Ahmad Fauzi" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHn5YhK0aDLnQ5dsfgmxIQcqUSJjvErPNtTbqxCuDelTWiMXCQRhmnb7iQwDo3Z1eblNNDBtJygr5g-9C4R0OFj_eVZhzRJ0YKaeV_Ipzx93xIUMLPtDnXtQkxqVw1_7RCx0DjcaV-x2E09TLonl2HSLN6K4CzZ6Nxr_wxo7ImIEWmyslSWvy3vUzqQqgtOCk7ZirNxaKoroMGarGUoyILNoyrwM9EPHSyZK9afvW2TqxgTqHCnQVQV11Ls9tM1XVjTA">
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">Ahmad Fauzi, S.Kom</span>
+            <div class="flex items-center gap-1 mt-0.5">
+              <span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-mono text-[10px] font-semibold">Administrator Utama</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">keyboard_arrow_down</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full px-8 py-7 flex flex-col gap-6"><!-- WELCOME & TITLE HEADER -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-surface-container">
+  <div>
+    <div class="flex items-center gap-2 mb-1">
+      <h1 class="text-2xl font-bold text-on-surface tracking-tight">Dashboard Administrator</h1>
+      <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200 inline-flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Sistem Aktif
+      </span>
+    </div>
+    <p class="text-sm text-secondary">Ringkasan metrik pengguna, status sistem, dan log aktivitas operasional SARPRA terkini.</p>
+  </div>
+  <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 bg-surface-container-lowest border border-surface-container px-3.5 py-2 rounded-lg shadow-xs text-xs font-medium text-secondary">
+      <span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+      <span class="">Senin, 24 Februari 2025</span>
+    </div>
+    <button id="refresh-data-btn" type="button" class="inline-flex items-center gap-2 px-3.5 py-2 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-[#1E3A5F] transition-colors shadow-xs">
+      <span id="refresh-icon" class="material-symbols-outlined text-[18px] transition-transform">refresh</span>
+      <span class="">Segarkan Data</span>
+    </button>
+  </div>
+</div>
+
+<!-- 3 STATISTIC METRIC CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+  <!-- Card 1: Total Pengguna Aktif -->
+  <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex items-center justify-between hover:border-outline-variant transition-all">
+    <div class="space-y-1">
+      <span class="text-xs font-medium text-secondary uppercase tracking-wider">Total Pengguna Aktif</span>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-extrabold text-on-surface tracking-tight">48</span>
+        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">+4 dari bulan lalu</span>
+      </div>
+      <p class="text-xs text-secondary pt-0.5">42 terverifikasi aktif minggu ini</p>
+    </div>
+    <div class="w-12 h-12 rounded-xl bg-secondary-container/70 flex items-center justify-center text-primary shadow-xs">
+      <span class="material-symbols-outlined text-[28px]">group</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Total Role -->
+  <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex items-center justify-between hover:border-outline-variant transition-all"><div class="space-y-1">
+      <span class="text-xs font-medium text-secondary uppercase tracking-wider">Total Role</span>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-extrabold text-on-surface tracking-tight">3 Role</span>
+      </div>
+      <p class="text-xs text-secondary pt-0.5">Administrator, Pengelola, Pimpinan</p>
+    </div>
+    <div class="w-12 h-12 rounded-xl bg-secondary-container/70 flex items-center justify-center text-primary shadow-xs">
+      <span class="material-symbols-outlined text-[28px]">verified_user</span>
+    </div></div>
+
+  <!-- Card 3: System Status -->
+  <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex items-center justify-between hover:border-outline-variant transition-all">
+    <div class="space-y-1">
+      <span class="text-xs font-medium text-secondary uppercase tracking-wider">Total Data Master</span>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-extrabold text-on-surface tracking-tight">6 Entitas</span>
+      </div>
+      <p class="text-xs text-secondary pt-0.5">Kategori, Satuan, Lokasi &amp; Ruang</p>
+    </div>
+    <div class="w-12 h-12 rounded-xl bg-secondary-container/70 flex items-center justify-center text-primary shadow-xs">
+      <span class="material-symbols-outlined text-[28px]">dataset</span>
+    </div>
+  </div>
+</div>
+
+<!-- DATA TABLE SECTION: AKTIVITAS PENGGUNA TERBARU -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl shadow-xs overflow-hidden flex flex-col">
+  <!-- Card Header & Filter Bar -->
+  <div class="p-5 border-b border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+    <div>
+      <h2 class="text-base font-bold text-on-surface">Aktivitas Pengguna Terbaru</h2>
+      <p class="text-xs text-secondary mt-0.5">Catatan riwayat aktivitas pengguna lintas modul SARPRA</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <!-- Search Field -->
+      <div class="relative flex items-center">
+        <span class="material-symbols-outlined absolute left-3 text-[18px] text-secondary pointer-events-none">search</span>
+        <input type="text" placeholder="Cari pengguna / aksi..." class="w-60 h-9 pl-9 pr-3 bg-surface-container-low border border-surface-container rounded-lg text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container/20 transition-all">
+      </div>
+      <!-- Filter Role -->
+      <div class="relative">
+        <select class="h-9 pl-3 pr-8 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none focus:border-primary-container cursor-pointer transition-all appearance-none">
+          <option value="">Semua Role</option>
+          <option value="admin">Administrator</option>
+          <option value="pengelola">Pengelola Sarpras</option>
+          <option value="pimpinan">Pimpinan</option>
+        </select>
+        <span class="material-symbols-outlined absolute right-2 top-2 text-[18px] text-secondary pointer-events-none">arrow_drop_down</span>
+      </div>
+      <!-- Filter Aktivitas -->
+      <div class="relative">
+        <select class="h-9 pl-3 pr-8 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none focus:border-primary-container cursor-pointer transition-all appearance-none">
+          <option value="">Semua Aktivitas</option>
+          <option value="login">Autentikasi</option>
+          <option value="create">Tambah Data</option>
+          <option value="update">Pembaruan Status</option>
+          <option value="approve">Persetujuan</option>
+        </select>
+        <span class="material-symbols-outlined absolute right-2 top-2 text-[18px] text-secondary pointer-events-none">arrow_drop_down</span>
+      </div>
+      <button type="button" class="h-9 px-3 bg-surface-container-low hover:bg-surface-container border border-surface-container rounded-lg text-xs font-semibold text-secondary flex items-center gap-1.5 transition-colors">
+        <span class="material-symbols-outlined text-[16px]">file_download</span>
+        <span class="">Ekspor</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Element -->
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs">
+      <thead class="bg-surface-container-low border-b border-surface-container text-secondary font-semibold uppercase tracking-wider text-[11px]">
+        <tr>
+          <th scope="col" class="py-3.5 px-5">Waktu</th>
+          <th scope="col" class="py-3.5 px-5">Pengguna</th>
+          <th scope="col" class="py-3.5 px-5">Role</th>
+          <th scope="col" class="py-3.5 px-5">Aktivitas</th>
+          <th scope="col" class="py-3.5 px-5">Status</th>
+          <th scope="col" class="py-3.5 px-5 text-right">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-surface-container font-normal text-on-surface">
+        <!-- Row 1 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 09:42:18</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary text-white font-bold flex items-center justify-center text-xs">AF</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Ahmad Fauzi, S.Kom</span>
+                <span class="text-[11px] text-secondary">ahmad.fauzi@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-mono text-[10px] font-semibold">Administrator</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Pembaruan Hak Akses Pengguna</span>
+              <span class="text-[11px] text-secondary font-mono">User ID: USR-00492 (Operator Ruang)</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Berhasil
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Row 2 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 09:31:05</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-xs">SR</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Siti Rahmawati, S.T.</span>
+                <span class="text-[11px] text-secondary">siti.rahma@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-mono text-[10px] font-semibold">Pengelola Sarpras</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Inventarisasi Aset Baru Lab Komputer</span>
+              <span class="text-[11px] text-secondary font-mono">Nomor Inventaris: AST-2025-0819</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Berhasil
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Row 3 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 09:15:42</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-amber-700 text-white font-bold flex items-center justify-center text-xs">HS</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Dr. Ir. H. Hendra Setiawan</span>
+                <span class="text-[11px] text-secondary">hendra.setiawan@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-mono text-[10px] font-semibold">Pimpinan</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Persetujuan Pengadaan AC Sentral Gd. A</span>
+              <span class="text-[11px] text-secondary font-mono">Dokumen SPK: SPK/PR-04/II/2025</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> Diproses
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Row 4 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 08:50:11</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-xs">BS</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Budi Santoso</span>
+                <span class="text-[11px] text-secondary">budi.santoso@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-mono text-[10px] font-semibold">Pengelola Sarpras</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Pengajuan Perbaikan Genset Unit Utama</span>
+              <span class="text-[11px] text-secondary font-mono">Tiket Laporan: TKT-MNT-2025-104</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Berhasil
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Row 5 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 08:22:30</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-rose-700 text-white font-bold flex items-center justify-center text-xs">RD</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Ratna Dewi, A.Md</span>
+                <span class="text-[11px] text-secondary">ratna.dewi@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-mono text-[10px] font-semibold">Pengelola Sarpras</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Verifikasi Barcode Aset Bergerak</span>
+              <span class="text-[11px] text-secondary font-mono">Gagal verifikasi serial: S/N tidak terdaftar</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-red-50 text-red-700 border border-red-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Gagal / Peringatan
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Row 6 -->
+        <tr class="hover:bg-surface-container-low/60 transition-colors">
+          <td class="py-3.5 px-5 whitespace-nowrap font-mono text-[11px] text-secondary">24 Feb 2025, 07:58:04</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary-container text-white font-bold flex items-center justify-center text-xs">DP</div>
+              <div class="flex flex-col">
+                <span class="font-semibold text-on-surface">Diana Prasetyo</span>
+                <span class="text-[11px] text-secondary">diana.p@sarpra.go.id</span>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-mono text-[10px] font-semibold">Pengelola Sarpras</span>
+          </td>
+          <td class="py-3.5 px-5">
+            <div class="flex flex-col">
+              <span class="font-medium text-on-surface">Peminjaman Proyektor Gedung Serbaguna</span>
+              <span class="text-[11px] text-secondary font-mono">Peminjaman: PJ-2025-0211 / R. Rapat 2</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Berhasil
+            </span>
+          </td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-right">
+            <button class="text-secondary hover:text-primary p-1 rounded hover:bg-surface-container transition-colors" title="Detail">
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Table Pagination Controls -->
+  <div class="p-4 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface-container-low/40">
+    <div class="flex items-center gap-3 text-xs text-secondary">
+      <span class="">Menampilkan <strong class="text-on-surface font-semibold">1 - 6</strong> dari <strong class="text-on-surface font-semibold">86</strong> data aktivitas</span>
+      <span class="text-outline">|</span>
+      <div class="flex items-center gap-1.5">
+        <span class="">Baris per halaman:</span>
+        <select class="h-7 px-2 bg-surface-container-lowest border border-surface-container rounded text-xs text-on-surface focus:outline-none">
+          <option value="6" selected="">6</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+    <!-- Page Navigation -->
+    <div class="flex items-center gap-1">
+      <button type="button" disabled="" class="px-2.5 py-1.5 border border-surface-container rounded-lg text-xs font-medium text-outline bg-surface-container-low cursor-not-allowed flex items-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+        <span class="">Sebelumnya</span>
+      </button>
+      <button type="button" class="w-8 h-8 rounded-lg bg-primary text-white text-xs font-semibold flex items-center justify-center shadow-xs">1</button>
+      <button type="button" class="w-8 h-8 rounded-lg border border-surface-container text-secondary hover:bg-surface-container-low text-xs font-medium flex items-center justify-center transition-colors">2</button>
+      <button type="button" class="w-8 h-8 rounded-lg border border-surface-container text-secondary hover:bg-surface-container-low text-xs font-medium flex items-center justify-center transition-colors">3</button>
+      <span class="px-1.5 text-xs text-secondary">...</span>
+      <button type="button" class="w-8 h-8 rounded-lg border border-surface-container text-secondary hover:bg-surface-container-low text-xs font-medium flex items-center justify-center transition-colors">15</button>
+      <button type="button" class="px-2.5 py-1.5 border border-surface-container rounded-lg text-xs font-medium text-on-surface hover:bg-surface-container-low flex items-center gap-1 transition-colors">
+        <span class="">Selanjutnya</span>
+        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="pt-5 pb-2 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-secondary text-xs">
+  <div class="flex items-center gap-2">
+    <span class="font-bold text-primary">SARPRA</span>
+    <span class="">•</span>
+    <span class="">Sistem Terpadu Pengelolaan Sarana dan Prasarana</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Operasional Aktif</span>
+    <span class="">•</span>
+    <span class="">Hak Cipta © 2025</span>
+  </div>
+</footer></main>
+  </div>
+
+  <script>
+    (function() {
+      const filterButtons = document.querySelectorAll('#time-filter-group .filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+            b.classList.add('text-secondary', 'font-medium');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+          btn.classList.remove('text-secondary', 'font-medium');
+        });
+      });
+
+      const refreshBtn = document.getElementById('refresh-data-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshBtn && refreshIcon) {
+        refreshBtn.addEventListener('click', () => {
+          refreshIcon.classList.add('rotate-180');
+          refreshBtn.classList.add('opacity-75');
+          setTimeout(() => {
+            refreshIcon.classList.remove('rotate-180');
+            refreshBtn.classList.remove('opacity-75');
+          }, 500);
+        });
+      }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html><html lang="id" style="width: 1336px; height: 587px; overflow: hidden; position: relative;"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>SARPRA - Dashboard Administratif Konsol Pusat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#022448',
+            'primary-container': '#1E3A5F',
+            'on-primary': '#FFFFFF',
+            'on-primary-container': '#8AA4CF',
+            secondary: '#515F74',
+            'secondary-container': '#D5E3FC',
+            'on-secondary-container': '#57657A',
+            surface: '#F8FAFC',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container-low': '#F1F5F9',
+            'surface-container': '#E2E8F0',
+            'surface-container-high': '#CBD5E1',
+            'on-surface': '#0F172A',
+            'on-surface-variant': '#475569',
+            outline: '#94A3B8',
+            'outline-variant': '#E2E8F0',
+            success: '#059669',
+            'success-bg': '#ECFDF5',
+            'success-text': '#047857',
+            warning: '#D97706',
+            'warning-bg': '#FFFBEB',
+            'warning-text': '#B45309',
+            danger: '#DC2626',
+            'danger-bg': '#FEF2F2',
+            'danger-text': '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-surface antialiased flex min-h-screen">
+
+  <!-- SIDEBAR PERSISTEN (260px) -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-primary-container z-50 flex flex-col justify-between shadow-lg text-white">
+    <div class="flex flex-col">
+      <!-- Logo & Brand Header -->
+      <div class="h-16 px-6 flex items-center gap-3 border-b border-[#2d4d7a]/50">
+        <img alt="SARPRA Logo" class="w-8 h-8 rounded-lg object-contain shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWuSsIW90C8IrRsEnI0zM--Lj-YLfw5Kns1NQ8ugKG0fpmAqKKZnNZC1XIXSAp1lvlv3ywkAWYYZvtAg1QufirV6-0cnRg5DxmPJHGr2sVDVCO4gsXy_ljE225RiIdp2b0TvRtdl-vVo6c8qMvHCnI1BgvuKDU3eGhx_jtY0Hn__jhUF2NyFomqGmfSSR2G6pmDL_29ucZN8dqOse-OCbDH5HQaJ7rupeMZSideV3PjbWRTJS8Y8u8u9r65D4U3nxyQ">
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg text-white tracking-tight leading-none">SARPRA</span>
+          <span class="text-[11px] font-semibold text-[#8AA4CF] tracking-wider uppercase mt-1">Asset &amp; Infra</span>
+        </div>
+      </div>
+
+      <!-- Menu Category Label -->
+      <div class="px-6 pt-6 pb-2">
+        <span class="text-[11px] font-bold text-[#8AA4CF] uppercase tracking-wider">Modul Operasional</span>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="flex flex-col gap-1 px-3"><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="text-sm">Dashboard</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="text-sm">Perencanaan Kebutuhan</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#022448] text-white font-semibold shadow-sm transition-all"><span class="material-symbols-outlined text-[20px] text-white">shopping_bag</span><span class="text-sm">Pengadaan</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="text-sm">Inventarisasi</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">build_circle</span><span class="text-sm">Pemeliharaan</span></a></nav>
+    </div>
+
+    <!-- System Badge / Footer -->
+    <div class="p-4 mx-3 mb-4 rounded-xl bg-[#022448]/80 border border-[#2c4e78]">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs text-white font-bold tracking-tight">SARPRA v1.0</span>
+        
+      </div>
+      <p class="text-[11px] text-[#8AA4CF] leading-relaxed">Sistem Pengelolaan Sarana dan Prasarana Terpadu</p>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA (Offset by 256px for sidebar) -->
+  <div class="pl-64 flex-1 flex flex-col min-w-0">
+
+    <!-- TOP HEADER BAR -->
+    <header class="sticky top-0 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-8 border-b border-surface-container shadow-sm">
+      <div class="flex items-center gap-3">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs font-medium text-secondary"><span class="font-bold text-primary">SARPRA</span><span class="text-outline">/</span><a href="#" class="text-on-surface-variant hover:text-primary transition-colors font-medium">Pengadaan</a><span class="text-outline">/</span><span class="text-primary font-bold bg-secondary-container/60 px-2 py-0.5 rounded">Formulir Baru</span></nav>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <!-- Global Search Bar -->
+        <div class="relative flex items-center">
+          <span class="material-symbols-outlined absolute left-3 text-[18px] text-secondary pointer-events-none">search</span>
+          <input type="text" placeholder="Cari aset, inventaris, serial number..." class="w-80 h-9 pl-9 pr-16 bg-surface-container-low border border-surface-container rounded-lg text-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all">
+          <kbd class="absolute right-2 px-1.5 py-0.5 bg-surface-container-lowest border border-surface-container text-secondary rounded font-mono text-[10px] font-semibold pointer-events-none shadow-xs">Ctrl + K</kbd>
+        </div>
+
+        <!-- Notification & Help Buttons -->
+        <div class="flex items-center gap-1 border-r border-surface-container pr-4">
+          <button type="button" aria-label="Notifications" class="relative p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-white font-mono text-[9px] font-bold">3</span>
+          </button>
+          <button type="button" aria-label="Help" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">help_outline</span>
+          </button>
+        </div>
+
+        <!-- Admin Profile Profile -->
+        <div class="flex items-center gap-3 cursor-pointer group"><img alt="Siti Rahmawati, S.T." class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0pgqCczLmefaiDXDEKEvIfmL41Emj0yasrhLzUYDyKf6CnncK1wY6JzEJt9DYTs76uvN3pHGOIyHacls-lZb0fNHZFaz0JFTIDR71RL9ps8C0xFCHNbt50B5wkhMxuwKQUTNRyBRXw2SEF3IecLCwgZTIkdziprAPOiTB4wPviDz_AXoPyue6mX1ZrnVLbSzlk3vWDe0-Pw1Pj2dgiPv20inFSqj8MjV35CEDdrOYgi0M7ROXXBypDUk48tIe_7O6wg"><div class="flex flex-col text-left"><span class="text-xs font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">Siti Rahmawati, S.T.</span><div class="flex items-center gap-1 mt-0.5"><span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-mono text-[10px] font-semibold">Pengelola Sarpras</span></div></div><span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">keyboard_arrow_down</span></div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full px-8 py-7 flex flex-col gap-6"><!-- Alert / Toast Banner Notification -->
+<div id="toast-notification" class="hidden items-center justify-between px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-sm transition-all duration-300 shadow-sm">
+  <div class="flex items-center gap-2.5">
+    <span class="material-symbols-outlined text-emerald-600 text-[20px]">check_circle</span>
+    <span id="toast-message" class="font-medium">Perubahan berhasil disimpan sebagai draf.</span>
+  </div>
+  <button type="button" onclick="document.getElementById('toast-notification').classList.add('hidden')" class="text-emerald-700 hover:text-emerald-900"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+
+<!-- Page Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2 border-b border-surface-container">
+  <div class="flex flex-col gap-1.5">
+    <div class="flex items-center gap-2">
+      <span class="px-2 py-0.5 bg-primary-container text-white text-[10px] font-bold rounded uppercase tracking-wider">MODUL PENGADAAN • DOKUMEN PERMOHONAN</span>
+      <span class="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-semibold rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Status: Baru (Drafting)</span>
+    </div>
+    <h1 class="text-2xl font-bold text-primary tracking-tight">Pengajuan Pengadaan Sarana &amp; Prasarana Baru</h1>
+    <p class="text-sm text-secondary leading-relaxed max-w-3xl">Ajukan usulan pembelian atau pengadaan sarana dan prasarana baru dengan rincian barang dan estimasi biaya yang jelas.</p>
+  </div>
+  <div class="flex items-center gap-3 shrink-0">
+    <button type="button" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-secondary hover:text-primary bg-surface-container-lowest border border-surface-container rounded-lg hover:bg-surface-container-low transition-colors shadow-xs">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span> Kembali ke Daftar Pengadaan
+    </button>
+    <button type="button" id="btn-quick-draft" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-primary bg-secondary-container hover:bg-secondary-container/80 rounded-lg transition-colors">
+      <span class="material-symbols-outlined text-[18px]">save</span> Simpan Draf Cepat
+    </button>
+  </div>
+</div>
+
+<!-- Form Layout Grid (8 Cols Left, 4 Cols Right) -->
+<form id="procurement-form" onsubmit="event.preventDefault();" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+  
+  <!-- LEFT COLUMN (8 cols): Main Detailed Inputs -->
+  <div class="lg:col-span-8 flex flex-col gap-6">
+
+    <!-- SECTION 1: Informasi Dokumen & Referensi RKBM -->
+    <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex flex-col gap-5"><div class="flex items-center justify-between border-b border-surface-container pb-3"><div class="flex items-center gap-2.5"><span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary-container text-white text-xs font-bold font-mono">01</span><h2 class="font-bold text-base text-primary">Informasi Pengajuan</h2></div><span class="text-xs text-on-surface-variant font-medium">Wajib diisi <span class="text-danger">*</span></span></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="flex flex-col gap-1.5 md:col-span-2"><label for="nama-pengajuan" class="text-xs font-bold text-on-surface flex items-center justify-between"><span class="">Nama Pengajuan / Kebutuhan Barang <span class="text-danger">*</span></span><span class="text-[11px] font-normal text-secondary">Tulis judul atau uraian ringkas pengadaan</span></label><div class="flex flex-col gap-2"><div class="relative"><span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-[18px] pointer-events-none">edit_note</span><input type="text" id="nama-pengajuan" class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" value="Pengadaan 3 Unit Laptop Administrasi Staf TU" placeholder="Contoh: Pengadaan 3 Unit Laptop Administrasi TU"></div><div class="flex flex-col gap-1.5 mt-1"><label for="ref-perencanaan-kebutuhan" class="text-xs font-bold text-on-surface flex items-center justify-between"><span class="">Dasar Perencanaan <span class="text-danger">*</span></span><span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">sync</span> Terhubung RKBM Otomatis</span></label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-[18px] pointer-events-none">bookmark</span><select id="ref-perencanaan-kebutuhan" class="w-full pl-9 pr-8 py-2 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 cursor-pointer" required=""><option value="" disabled="" class="">-- Pilih Dasar Perencanaan Kebutuhan --</option><option value="PRN-2025-001" selected="" class="">PRN-2025-001: Laptop untuk staf administrasi - 5 unit · Prioritas: Tinggi</option><option value="PRN-2025-002" class="">PRN-2025-002: Proyektor Portable Ruang Rapat - 2 Unit · Prioritas: Sedang</option><option value="PRN-2025-003" class="">PRN-2025-003: AC Split Kantor 1.5 PK - 2 Unit · Prioritas: Sedang</option><option value="PRN-2025-004" class="">PRN-2025-004: Kursi Kerja Ergonomis Jaring - 10 Unit · Prioritas: Sedang</option><option value="PRN-2025-005" class="">PRN-2025-005: UPS Backup Server Rack 1500VA - 2 Unit · Prioritas: Tinggi</option></select></div></div></div></div><div class="flex flex-col gap-1.5"><label for="tgl-pengajuan" class="text-xs font-bold text-on-surface">Tanggal Pengajuan <span class="text-danger">*</span></label><div class="relative"><span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-[18px] pointer-events-none">calendar_today</span><input type="date" id="tgl-pengajuan" value="2025-10-24" class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-surface-container rounded-lg text-xs font-medium text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20"></div></div><div class="flex flex-col gap-1.5"><label class="text-xs font-bold text-on-surface">Unit Kerja Pemohon</label><input type="text" readonly="" value="Subbag Tata Usaha &amp; Rumah Tangga" class="w-full px-3 py-2 bg-surface-container border border-surface-container rounded-lg text-xs font-medium text-secondary cursor-not-allowed"></div></div><div class="flex flex-col gap-1.5"><label for="justifikasi-input" class="text-xs font-bold text-on-surface">Alasan / Urgensi Pengadaan <span class="text-danger">*</span></label><textarea id="justifikasi-input" rows="3" placeholder="Uraikan alasan urgensi kebutuhan pengadaan sarana dan prasarana..." class="w-full p-3 bg-surface-container-low border border-surface-container rounded-lg text-xs leading-relaxed text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20">Pengadaan 3 unit laptop operasional untuk staf bagian administrasi umum Subbag TU dikarenakan unit eksisting (tahun perolehan 2018) sering mengalami freeze dan tidak kompatibel dengan sistem pelaporan digital SARPRA v1.0 yang baru diterapkan.</textarea></div></div>
+
+    <!-- SECTION 2: Rincian Barang & Spesifikasi Teknis (Dynamic Table) -->
+    <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex flex-col gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-surface-container pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary-container text-white text-xs font-bold font-mono">02</span>
+          <div>
+            <h2 class="font-bold text-base text-primary">Daftar Rincian Pengadaan &amp; Spesifikasi Teknis</h2>
+            <p class="text-xs text-secondary">Cantumkan rincian merk, spesifikasi minimum, jumlah, dan estimasi harga perolehan.</p>
+          </div>
+        </div>
+        <button type="button" id="btn-add-item-row" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-lg hover:bg-[#1E3A5F] transition-colors shadow-xs self-start sm:self-auto">
+          <span class="material-symbols-outlined text-[16px]">add</span> Tambah Baris Barang
+        </button>
+      </div>
+
+      <!-- Interactive Dynamic Table Container -->
+      <div class="overflow-x-auto border border-surface-container rounded-lg">
+        <table class="w-full text-left text-xs" id="items-table">
+  <thead class="bg-surface-container-low text-secondary font-semibold border-b border-surface-container">
+    <tr>
+      <th class="p-2.5 text-center w-12">No</th>
+      <th class="p-2.5 min-w-[200px]">Nama Barang &amp; Spesifikasi Teknis</th>
+      <th class="p-2.5 w-20 text-center">Jumlah</th>
+      <th class="p-2.5 w-28">Satuan</th>
+      <th class="p-2.5 w-40 text-right">Harga Satuan (Rp)</th>
+      <th class="p-2.5 w-40 text-right">Subtotal (Rp)</th>
+      <th class="p-2.5 w-12 text-center">Aksi</th>
+    </tr>
+  </thead>
+  <tbody id="items-table-body" class="divide-y divide-surface-container bg-surface-container-lowest">
+    <tr class="item-row group hover:bg-surface-container-low/50 transition-colors bg-secondary-container/20">
+      <td class="p-2.5 text-center font-mono font-medium text-secondary row-number">1</td>
+      <td class="p-2.5">
+        <div class="flex items-center gap-2">
+          <input type="text" class="item-name w-full px-2.5 py-1.5 bg-surface-container-lowest border border-surface-container rounded text-xs text-on-surface focus:outline-none focus:border-primary-container font-medium" value="Laptop Administrasi" placeholder="Nama barang &amp; spesifikasi...">
+          <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded shrink-0 whitespace-nowrap">Perencanaan</span>
+        </div>
+      </td>
+      <td class="p-2.5">
+        <input type="number" min="1" class="item-qty w-full px-2 py-1.5 text-center bg-surface-container-lowest border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="5">
+      </td>
+      <td class="p-2.5">
+        <select class="item-unit w-full px-2.5 py-1.5 bg-surface-container-lowest border border-surface-container rounded text-xs text-on-surface focus:outline-none cursor-pointer">
+          <option selected="" value="Unit">Unit</option>
+          <option value="Set">Set</option>
+          <option value="Buah">Buah</option>
+          <option value="Paket">Paket</option>
+          <option value="Lisensi">Lisensi</option>
+        </select>
+      </td>
+      <td class="p-2.5">
+        <div class="relative flex items-center">
+          <span class="absolute left-2.5 text-[11px] text-secondary font-mono pointer-events-none">Rp</span>
+          <input type="text" class="item-price w-full pl-8 pr-2.5 py-1.5 text-right bg-surface-container-lowest border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="8.350.000" placeholder="Harga satuan...">
+        </div>
+      </td>
+      <td class="p-2.5 text-right font-mono font-bold text-primary item-subtotal whitespace-nowrap">Rp 41.750.000</td>
+      <td class="p-2.5 text-center">
+        <div class="inline-flex items-center justify-center p-1 text-secondary opacity-60 cursor-not-allowed" title="Terkunci dari Dasar Perencanaan (RKBM)">
+          <span class="material-symbols-outlined text-[18px] text-secondary/60">lock</span>
+        </div>
+      </td>
+    </tr>
+    <tr class="item-row group hover:bg-surface-container-low/50 transition-colors">
+      <td class="p-2.5 text-center font-mono font-medium text-secondary row-number">2</td>
+      <td class="p-2.5">
+        <input type="text" class="item-name w-full px-2.5 py-1.5 bg-surface-container-low border border-surface-container rounded text-xs text-on-surface focus:outline-none focus:border-primary-container" value="Tas Laptop &amp; Mouse Wireless Silent" placeholder="Nama barang &amp; spesifikasi...">
+      </td>
+      <td class="p-2.5">
+        <input type="number" min="1" class="item-qty w-full px-2 py-1.5 text-center bg-surface-container-low border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="5">
+      </td>
+      <td class="p-2.5">
+        <select class="item-unit w-full px-2.5 py-1.5 bg-surface-container-low border border-surface-container rounded text-xs text-on-surface focus:outline-none cursor-pointer">
+          <option value="Unit">Unit</option>
+          <option selected="" value="Set">Set</option>
+          <option value="Buah">Buah</option>
+          <option value="Paket">Paket</option>
+          <option value="Lisensi">Lisensi</option>
+        </select>
+      </td>
+      <td class="p-2.5">
+        <div class="relative flex items-center">
+          <span class="absolute left-2.5 text-[11px] text-secondary font-mono pointer-events-none">Rp</span>
+          <input type="text" class="item-price w-full pl-8 pr-2.5 py-1.5 text-right bg-surface-container-low border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="250.000" placeholder="Harga satuan...">
+        </div>
+      </td>
+      <td class="p-2.5 text-right font-mono font-bold text-primary item-subtotal whitespace-nowrap">Rp 1.250.000</td>
+      <td class="p-2.5 text-center">
+        <button type="button" class="btn-delete-row p-1 text-secondary hover:text-danger rounded hover:bg-surface-container transition-colors" title="Hapus Baris">
+          <span class="material-symbols-outlined text-[18px]">delete</span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot class="bg-surface-container-low/80 border-t-2 border-surface-container text-xs font-semibold">
+    <tr class="bg-surface-container-lowest border-t border-surface-container">
+      <td colspan="7" class="px-4 py-2">
+        <div class="flex items-center gap-2">
+          <span class="italic text-secondary text-[11px]">*tambahkan barang/perlengkapan jika diperlukan</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5" class="p-3 text-right text-secondary uppercase tracking-wider">Total Estimasi Nilai Pengajuan:</td>
+      <td id="grand-total-display" class="p-3 text-right font-mono text-base font-extrabold text-primary whitespace-nowrap">Rp 43.000.000</td>
+      <td class=""></td>
+    </tr>
+  </tfoot>
+</table>
+      </div>
+
+      <!-- Terbilang Display Banner -->
+      <div class="flex items-center gap-2 p-3 bg-secondary-container/40 rounded-lg border border-secondary-container">
+        <span class="material-symbols-outlined text-[18px] text-primary">payments</span>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 text-xs">
+          <span class="font-bold text-primary">Terbilang:</span>
+          <span id="terbilang-text" class="italic text-on-surface-variant">Empat Puluh Tiga Juta Rupiah</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Unggah Dokumen Pendukung & KAK/RKA -->
+    <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex flex-col gap-4"><div class="flex items-center justify-between border-b border-surface-container pb-3"><div class="flex items-center gap-2.5"><span class="flex items-center justify-center w-7 h-7 rounded-lg bg-primary-container text-white text-xs font-bold font-mono">03</span><h2 class="font-bold text-base text-primary">Dokumen Pendukung (Opsional)</h2></div><span class="text-xs text-secondary">Format PDF, JPG, PNG maks. 10MB</span></div><div class="flex flex-col gap-2 pt-1"><span class="text-xs font-bold text-on-surface">Berkas yang Terlampir (1 Berkas):</span><div class="flex items-center justify-between p-3 rounded-lg border border-surface-container bg-surface-container-low hover:bg-surface-container transition-colors"><div class="flex items-center gap-3"><div class="p-2 bg-rose-100 text-rose-700 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">picture_as_pdf</span></div><div class="flex flex-col"><span class="text-xs font-bold text-primary">Spesifikasi_Teknis_Laptop_TU.pdf</span><div class="flex items-center gap-2 text-[11px] text-secondary"><span class="">1.42 MB</span><span class="">•</span><span class="text-emerald-600 font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">check</span> Terlampir</span></div></div></div><div class="flex items-center gap-1"><button type="button" class="p-1.5 text-secondary hover:text-primary rounded" title="Pratinjau Dokumen"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" onclick="this.closest('.flex.items-center.justify-between').remove();" class="p-1.5 text-secondary hover:text-danger rounded" title="Hapus Dokumen"><span class="material-symbols-outlined text-[18px]">delete</span></button></div></div></div></div>
+
+  </div>
+
+  <!-- RIGHT COLUMN (4 cols): Sticky Summary, Approval Flow & Verification -->
+  <div class="lg:col-span-4 flex flex-col gap-6 sticky top-20"><div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex flex-col gap-4"><div class="flex items-center justify-between border-b border-surface-container pb-3"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">receipt_long</span><h3 class="font-bold text-sm text-primary">Ringkasan Pengajuan</h3></div><span class="text-[10px] font-semibold px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-full">Draf</span></div><div class="flex flex-col gap-3"><div class="flex items-center justify-between text-xs"><span class="text-secondary">Total Rincian Barang:</span><span class="font-semibold text-on-surface">3 Item <span class="text-secondary font-normal">(9 Unit fisik)</span></span></div><div class="flex items-center justify-between text-xs"><span class="text-secondary">Unit Pemohon:</span><span class="font-medium text-on-surface">Subbag Tata Usaha</span></div><div class="h-px bg-surface-container my-0.5"></div><div class="flex flex-col gap-1"><span class="text-xs text-secondary">Total Estimasi Biaya:</span><span id="sidebar-est-cost" class="font-mono font-extrabold text-2xl text-primary">Rp 43.000.000</span></div><div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-container text-[11px] text-secondary flex items-start gap-2"><span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">info</span><span class="">Biaya dihitung otomatis berdasarkan jumlah unit dan estimasi harga satuan pada tabel.</span></div></div></div><div class="bg-surface-container-lowest border border-surface-container rounded-xl p-5 shadow-xs flex flex-col gap-4"><div class="flex items-center gap-2 border-b border-surface-container pb-3"><span class="material-symbols-outlined text-primary text-[20px]">account_tree</span><h3 class="font-bold text-sm text-primary">Alur Persetujuan</h3></div><div class="relative flex flex-col gap-4 pl-4 border-l-2 border-primary-container/30 ml-2"><div class="relative flex flex-col gap-1"><span class="absolute -left-[23px] top-0 flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-[10px] font-bold ring-4 ring-white"><span class="material-symbols-outlined text-[12px]">check</span></span><div class="flex items-center justify-between"><span class="text-xs font-bold text-primary">1. Pemohon</span><span class="text-[10px] bg-primary text-white px-1.5 py-0.2 rounded font-semibold">Aktif</span></div><p class="text-[11px] text-secondary leading-snug">Siti Rahmawati, S.T. (Pengelola Sarpras)</p></div><div class="relative flex flex-col gap-1"><span class="absolute -left-[23px] top-0 flex items-center justify-center w-5 h-5 rounded-full bg-surface-container-high text-secondary text-[10px] font-bold ring-4 ring-white">2</span><div class="flex items-center justify-between"><span class="text-xs font-bold text-on-surface">2. Pejabat Penyetujui / Pimpinan</span><span class="text-[10px] bg-surface-container text-secondary px-1.5 py-0.2 rounded font-medium">Menunggu Kirim</span></div><p class="text-[11px] text-secondary leading-snug">Verifikasi kebutuhan operasional &amp; persetujuan pengadaan.</p></div></div></div><div class="bg-surface-container-lowest border border-surface-container rounded-xl p-4 shadow-sm flex flex-col gap-2.5"><button type="button" id="btn-submit-pengadaan" class="w-full py-2.5 px-4 bg-primary text-white text-xs font-bold rounded-lg hover:bg-primary-container transition-all shadow-sm flex items-center justify-center gap-2 group"><span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">send</span><span class="">Kirim Pengajuan</span></button><button type="button" id="btn-save-draft" class="w-full py-2 px-4 bg-surface-container-low hover:bg-surface-container text-secondary hover:text-primary text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[16px]">save</span><span class="">Simpan sebagai Draft</span></button><button type="button" class="w-full py-1.5 text-secondary hover:text-danger text-xs font-medium transition-colors text-center">Batalkan</button></div></div>
+</form>
+
+<!-- Confirmation Modal -->
+<div id="confirm-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4">
+  <div class="bg-surface-container-lowest border border-surface-container rounded-2xl max-w-md w-full p-6 shadow-xl flex flex-col gap-4 animate-in fade-in zoom-in duration-200">
+    <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+      <span class="material-symbols-outlined text-[28px]">verified</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <h3 class="text-base font-bold text-primary">Konfirmasi Pengiriman Pengajuan</h3>
+      <p class="text-xs text-secondary leading-relaxed">Apakah Anda yakin ingin meneruskan pengajuan pengadaan <span class="font-mono font-semibold text-primary">PGD-SARPRA/2025/X/0084</span> sejumlah <span id="modal-total-amt" class="font-bold text-primary">Rp 26.550.000</span> ke Pejabat Pembuat Komitmen (PPK)?</p>
+    </div>
+    <div class="flex items-center justify-end gap-3 pt-2 border-t border-surface-container">
+      <button type="button" onclick="document.getElementById('confirm-modal').classList.add('hidden'); document.getElementById('confirm-modal').classList.remove('flex');" class="px-4 py-2 text-xs font-semibold text-secondary hover:bg-surface-container-low rounded-lg transition-colors">Periksa Kembali</button>
+      <button type="button" id="btn-confirm-submit" class="px-4 py-2 text-xs font-bold bg-primary text-white hover:bg-primary-container rounded-lg transition-colors flex items-center gap-1.5 shadow-xs"><span class="material-symbols-outlined text-[16px]">send</span> Ya, Kirimkan</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER PERSISTENT -->
+<footer class="pt-5 pb-2 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-secondary text-xs">
+  <div class="flex items-center gap-2">
+    <span class="font-bold text-primary">SARPRA</span>
+    <span class="">•</span>
+    <span class="">Sistem Terpadu Pengelolaan Sarana dan Prasarana</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Operasional Aktif</span>
+    <span class="">•</span>
+    <span class="">Hak Cipta © 2025</span>
+  </div>
+</footer></main>
+  </div>
+
+  <script>
+    (function() {
+      const filterButtons = document.querySelectorAll('#time-filter-group .filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+            b.classList.add('text-secondary', 'font-medium');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+          btn.classList.remove('text-secondary', 'font-medium');
+        });
+      });
+
+      const refreshBtn = document.getElementById('refresh-data-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshBtn && refreshIcon) {
+        refreshBtn.addEventListener('click', () => {
+          refreshIcon.classList.add('rotate-180');
+          refreshBtn.classList.add('opacity-75');
+          setTimeout(() => {
+            refreshIcon.classList.remove('rotate-180');
+            refreshBtn.classList.remove('opacity-75');
+          }, 500);
+        });
+      }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+<script id="procurement-form-logic" class="">
+  (function() {
+    const tableBody = document.getElementById('items-table-body');
+    const grandTotalEl = document.getElementById('grand-total-display');
+    const sidebarEstEl = document.getElementById('sidebar-est-cost');
+    const sidebarRemEl = document.getElementById('sidebar-remaining-pagu');
+    const budgetBarEl = document.getElementById('budget-bar');
+    const budgetPercentText = document.getElementById('budget-percent-text');
+    const terbilangEl = document.getElementById('terbilang-text');
+    const addRowBtn = document.getElementById('btn-add-item-row');
+    const toastEl = document.getElementById('toast-notification');
+    const toastMsgEl = document.getElementById('toast-message');
+    const confirmModal = document.getElementById('confirm-modal');
+
+    const TOTAL_PAGU = 30000000; // Rp 30 Juta (RKBM default)
+
+    function formatRupiah(num) {
+      return 'Rp ' + Number(num).toLocaleString('id-ID');
+    }
+
+    function angkaKeTerbilang(nilai) {
+      nilai = Math.floor(nilai);
+      if (nilai === 0) return 'Nol Rupiah';
+      const huruf = ['', 'Satu', 'Dua', 'Tiga', 'Empat', 'Lima', 'Enam', 'Tujuh', 'Delapan', 'Sembilan', 'Sepuluh', 'Sebelas'];
+      function bagi(n) {
+        if (n < 12) return huruf[n];
+        if (n < 20) return bagi(n - 10) + ' Belas';
+        if (n < 100) return bagi(Math.floor(n / 10)) + ' Puluh ' + huruf[n % 10];
+        if (n < 200) return 'Seratus ' + bagi(n - 100);
+        if (n < 1000) return bagi(Math.floor(n / 100)) + ' Ratus ' + bagi(n % 100);
+        if (n < 2000) return 'Seribu ' + bagi(n - 1000);
+        if (n < 1000000) return bagi(Math.floor(n / 1000)) + ' Ribu ' + bagi(n % 1000);
+        if (n < 1000000000) return bagi(Math.floor(n / 1000000)) + ' Juta ' + bagi(n % 1000000);
+        return bagi(Math.floor(n / 1000000000)) + ' Miliar ' + bagi(n % 1000000000);
+      }
+      return (bagi(nilai) + ' Rupiah').replace(/\s+/g, ' ').trim();
+    }
+
+    function recalculate() {
+      if (!tableBody) return;
+      const rows = tableBody.querySelectorAll('tr.item-row');
+      let total = 0;
+
+      rows.forEach((row, index) => {
+        const rowNum = row.querySelector('.row-number');
+        if (rowNum) rowNum.textContent = index + 1;
+        
+        const qtyInput = row.querySelector('.item-qty');
+        const priceInput = row.querySelector('.item-price');
+        const subtotalEl = row.querySelector('.item-subtotal');
+        
+        const qty = parseFloat(qtyInput ? qtyInput.value : 0) || 0;
+        const price = parseFloat(priceInput ? priceInput.value : 0) || 0;
+        const sub = qty * price;
+        total += sub;
+
+        if (subtotalEl) {
+          subtotalEl.textContent = formatRupiah(sub);
+        }
+      });
+
+      if (grandTotalEl) grandTotalEl.textContent = formatRupiah(total);
+      if (sidebarEstEl) sidebarEstEl.textContent = formatRupiah(total);
+
+      const remaining = TOTAL_PAGU - total;
+      if (sidebarRemEl) {
+        sidebarRemEl.textContent = formatRupiah(remaining);
+        if (remaining < 0) {
+          sidebarRemEl.className = 'font-mono font-extrabold text-danger text-sm';
+        } else {
+          sidebarRemEl.className = 'font-mono font-extrabold text-emerald-700 text-sm';
+        }
+      }
+
+      const percent = Math.min(100, Math.max(0, (total / TOTAL_PAGU) * 100)).toFixed(1);
+      if (budgetBarEl) budgetBarEl.style.width = percent + '%';
+      if (budgetPercentText) budgetPercentText.textContent = percent + '%';
+      if (terbilangEl) terbilangEl.textContent = angkaKeTerbilang(total);
+    }
+
+    function attachRowEvents(row) {
+      const qty = row.querySelector('.item-qty');
+      const price = row.querySelector('.item-price');
+      const del = row.querySelector('.btn-delete-row');
+
+      if (qty) qty.addEventListener('input', recalculate);
+      if (price) price.addEventListener('input', recalculate);
+      if (del) {
+        del.addEventListener('click', function() {
+          const rows = tableBody.querySelectorAll('tr.item-row');
+          if (rows.length <= 1) {
+            alert('Minimal harus memiliki 1 rincian barang.');
+            return;
+          }
+          row.remove();
+          recalculate();
+        });
+      }
+    }
+
+    if (tableBody) {
+      tableBody.querySelectorAll('tr.item-row').forEach(attachRowEvents);
+    }
+
+    if (addRowBtn && tableBody) {
+      addRowBtn.addEventListener('click', function() {
+        const currentCount = tableBody.querySelectorAll('tr.item-row').length + 1;
+        const newRow = document.createElement('tr');
+        newRow.className = 'item-row group hover:bg-surface-container-low/50 transition-colors';
+        newRow.innerHTML = `
+          <td class="p-2.5 text-center font-mono font-medium text-secondary row-number">${currentCount}</td>
+          <td class="p-2.5">
+            <input type="text" class="item-name w-full px-2 py-1.5 bg-surface-container-low border border-surface-container rounded text-xs text-on-surface focus:outline-none focus:border-primary-container" placeholder="Tulis nama barang & spesifikasi...">
+          </td>
+          <td class="p-2.5">
+            <input type="number" min="1" class="item-qty w-full px-2 py-1.5 text-center bg-surface-container-low border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="1">
+          </td>
+          <td class="p-2.5">
+            <select class="item-unit w-full px-2 py-1.5 bg-surface-container-low border border-surface-container rounded text-xs text-on-surface focus:outline-none">
+              <option value="Unit">Unit</option>
+              <option value="Set">Set</option>
+              <option value="Buah">Buah</option>
+              <option value="Paket">Paket</option>
+            </select>
+          </td>
+          <td class="p-2.5">
+            <input type="number" min="0" step="1000" class="item-price w-full px-2 py-1.5 text-right bg-surface-container-low border border-surface-container rounded text-xs font-mono font-semibold focus:outline-none focus:border-primary-container" value="0">
+          </td>
+          <td class="p-2.5 text-right font-mono font-bold text-primary item-subtotal">Rp 0</td>
+          <td class="p-2.5 text-center">
+            <button type="button" class="btn-delete-row text-secondary hover:text-danger p-1 rounded transition-colors" title="Hapus baris">
+              <span class="material-symbols-outlined text-[18px]">delete_outline</span>
+            </button>
+          </td>
+        `;
+        tableBody.appendChild(newRow);
+        attachRowEvents(newRow);
+        recalculate();
+      });
+    }
+
+    function showToast(message) {
+      if (!toastEl) return;
+      if (toastMsgEl) toastMsgEl.textContent = message;
+      toastEl.classList.remove('hidden');
+      toastEl.classList.add('flex');
+      setTimeout(() => {
+        toastEl.classList.add('hidden');
+        toastEl.classList.remove('flex');
+      }, 4000);
+    }
+
+    const quickDraftBtn = document.getElementById('btn-quick-draft');
+    const saveDraftBtn = document.getElementById('btn-save-draft');
+    if (quickDraftBtn) {
+      quickDraftBtn.addEventListener('click', () => showToast('Draf formulir pengadaan PGD-SARPRA/2025/X/0084 tersimpan secara otomatis.'));
+    }
+    if (saveDraftBtn) {
+      saveDraftBtn.addEventListener('click', () => showToast('Draf pengadaan berhasil disimpan! Anda dapat melanjutkannya kapan saja melalui menu Pengadaan.'));
+    }
+
+    const submitPengadaanBtn = document.getElementById('btn-submit-pengadaan');
+    const modalTotalAmt = document.getElementById('modal-total-amt');
+    if (submitPengadaanBtn && confirmModal) {
+      submitPengadaanBtn.addEventListener('click', () => {
+        if (modalTotalAmt && grandTotalEl) modalTotalAmt.textContent = grandTotalEl.textContent;
+        confirmModal.classList.remove('hidden');
+        confirmModal.classList.add('flex');
+      });
+    }
+
+    const confirmSubmitBtn = document.getElementById('btn-confirm-submit');
+    if (confirmSubmitBtn && confirmModal) {
+      confirmSubmitBtn.addEventListener('click', () => {
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+        showToast('Pengajuan pengadaan berhasil dikirim ke PPK dengan status: "Menunggu Persetujuan PPK".');
+      });
+    }
+  })();
+</script></body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>SARPRA - Dashboard Administratif Konsol Pusat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#022448',
+            'primary-container': '#1E3A5F',
+            'on-primary': '#FFFFFF',
+            'on-primary-container': '#8AA4CF',
+            secondary: '#515F74',
+            'secondary-container': '#D5E3FC',
+            'on-secondary-container': '#57657A',
+            surface: '#F8FAFC',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container-low': '#F1F5F9',
+            'surface-container': '#E2E8F0',
+            'surface-container-high': '#CBD5E1',
+            'on-surface': '#0F172A',
+            'on-surface-variant': '#475569',
+            outline: '#94A3B8',
+            'outline-variant': '#E2E8F0',
+            success: '#059669',
+            'success-bg': '#ECFDF5',
+            'success-text': '#047857',
+            warning: '#D97706',
+            'warning-bg': '#FFFBEB',
+            'warning-text': '#B45309',
+            danger: '#DC2626',
+            'danger-bg': '#FEF2F2',
+            'danger-text': '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-surface antialiased flex min-h-screen">
+
+  <!-- SIDEBAR PERSISTEN (260px) -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-primary-container z-50 flex flex-col justify-between shadow-lg text-white">
+    <div class="flex flex-col">
+      <!-- Logo & Brand Header -->
+      <div class="h-16 px-6 flex items-center gap-3 border-b border-[#2d4d7a]/50">
+        <img alt="SARPRA Logo" class="w-8 h-8 rounded-lg object-contain shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWuSsIW90C8IrRsEnI0zM--Lj-YLfw5Kns1NQ8ugKG0fpmAqKKZnNZC1XIXSAp1lvlv3ywkAWYYZvtAg1QufirV6-0cnRg5DxmPJHGr2sVDVCO4gsXy_ljE225RiIdp2b0TvRtdl-vVo6c8qMvHCnI1BgvuKDU3eGhx_jtY0Hn__jhUF2NyFomqGmfSSR2G6pmDL_29ucZN8dqOse-OCbDH5HQaJ7rupeMZSideV3PjbWRTJS8Y8u8u9r65D4U3nxyQ">
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg text-white tracking-tight leading-none">SARPRA</span>
+          <span class="text-[11px] font-semibold text-[#8AA4CF] tracking-wider uppercase mt-1">Asset &amp; Infra</span>
+        </div>
+      </div>
+
+      <!-- Menu Category Label -->
+      <div class="px-6 pt-6 pb-2">
+        <span class="text-[11px] font-bold text-[#8AA4CF] uppercase tracking-wider">Modul Operasional</span>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="flex flex-col gap-1 px-3"><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#022448] text-white font-semibold shadow-sm transition-all"><span class="material-symbols-outlined text-[20px] text-white">grid_view</span><span class="text-sm">Dashboard</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="text-sm">Perencanaan Kebutuhan</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span class="text-sm">Pengadaan</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="text-sm">Inventarisasi</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">build_circle</span><span class="text-sm">Pemeliharaan</span></a></nav>
+    </div>
+
+    <!-- System Badge / Footer -->
+    <div class="p-4 mx-3 mb-4 rounded-xl bg-[#022448]/80 border border-[#2c4e78]">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs text-white font-bold tracking-tight">SARPRA v1.0</span>
+        
+      </div>
+      <p class="text-[11px] text-[#8AA4CF] leading-relaxed">Sistem Pengelolaan Sarana dan Prasarana Terpadu</p>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA (Offset by 256px for sidebar) -->
+  <div class="pl-64 flex-1 flex flex-col min-w-0">
+
+    <!-- TOP HEADER BAR -->
+    <header class="sticky top-0 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-8 border-b border-surface-container shadow-sm">
+      <div class="flex items-center gap-3">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs font-medium text-secondary"><span class="font-bold text-primary">SARPRA</span><span class="text-outline">/</span><span class="text-on-surface-variant font-medium">Pengelola</span><span class="text-outline">/</span><span class="text-primary font-bold bg-secondary-container/60 px-2 py-0.5 rounded">Dashboard</span></nav>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <!-- Global Search Bar -->
+        
+
+        <!-- Notification & Help Buttons -->
+        <div class="flex items-center gap-1 border-r border-surface-container pr-4">
+          <button type="button" aria-label="Notifications" class="relative p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-white font-mono text-[9px] font-bold">3</span>
+          </button>
+          <button type="button" aria-label="Help" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">help_outline</span>
+          </button>
+        </div>
+
+        <!-- Admin Profile Profile -->
+        <div class="flex items-center gap-3 cursor-pointer group"><img alt="Siti Rahmawati, S.T." class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0pgqCczLmefaiDXDEKEvIfmL41Emj0yasrhLzUYDyKf6CnncK1wY6JzEJt9DYTs76uvN3pHGOIyHacls-lZb0fNHZFaz0JFTIDR71RL9ps8C0xFCHNbt50B5wkhMxuwKQUTNRyBRXw2SEF3IecLCwgZTIkdziprAPOiTB4wPviDz_AXoPyue6mX1ZrnVLbSzlk3vWDe0-Pw1Pj2dgiPv20inFSqj8MjV35CEDdrOYgi0M7ROXXBypDUk48tIe_7O6wg"><div class="flex flex-col text-left"><span class="text-xs font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">Siti Rahmawati, S.T.</span><div class="flex items-center gap-1 mt-0.5"><span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-mono text-[10px] font-semibold">Pengelola Sarpras</span></div></div><span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">keyboard_arrow_down</span></div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full px-8 py-7 flex flex-col gap-6"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2"><div class="flex flex-col gap-1"><div class="inline-flex items-center gap-2"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span><span class="text-[11px] font-bold text-secondary uppercase tracking-wider">KONSOL OPERASIONAL PENGELOLA</span></div><h1 class="text-2xl font-bold text-on-surface tracking-tight">Selamat Datang, Siti Rahmawati, S.T.</h1><p class="text-xs text-on-surface-variant">Ringkasan inventarisasi, kondisi sarana prasarana, dan pengajuan operasional aktif hari ini</p></div><div class="flex items-center gap-3 flex-wrap"><div class="inline-flex items-center bg-surface-container border border-surface-container rounded-lg p-1 text-xs" id="time-filter-group"><button type="button" class="filter-btn px-3 py-1.5 rounded-md font-bold bg-surface-container-lowest text-primary shadow-xs transition-colors">Hari Ini</button><button type="button" class="filter-btn px-3 py-1.5 rounded-md font-medium text-secondary hover:text-primary transition-colors">7 Hari</button><button type="button" class="filter-btn px-3 py-1.5 rounded-md font-medium text-secondary hover:text-primary transition-colors">30 Hari</button></div><button type="button" class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container hover:bg-[#254670] text-white rounded-lg text-xs font-semibold shadow-sm transition-all"><span class="material-symbols-outlined text-[18px]">add_shopping_cart</span><span class="">Buat Pengajuan Pengadaan</span></button></div></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Total Aset</span><span class="p-2 rounded-lg bg-surface-container-low text-primary material-symbols-outlined text-[20px]">inventory_2</span></div><div class="mt-3"><div class="text-xl font-bold text-on-surface font-mono">1.842 <span class="text-xs font-sans text-secondary font-medium">Unit</span></div><div class="text-[11px] text-on-surface-variant mt-0.5">Terdaftar dalam 24 kategori</div></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Barang Baik</span><span class="p-2 rounded-lg bg-[#ECFDF5] text-[#047857] material-symbols-outlined text-[20px]">check_circle</span></div><div class="mt-3"><div class="text-xl font-bold text-[#047857] font-mono">1.654 <span class="text-xs font-sans text-secondary font-medium">Unit</span></div><div class="text-[11px] text-on-surface-variant mt-0.5"><span class="font-semibold text-[#047857]">89.8%</span> kondisi optimal</div></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Rusak Ringan</span><span class="p-2 rounded-lg bg-[#FFFBEB] text-[#B45309] material-symbols-outlined text-[20px]">report_problem</span></div><div class="mt-3"><div class="text-xl font-bold text-[#B45309] font-mono">136 <span class="text-xs font-sans text-secondary font-medium">Unit</span></div><div class="text-[11px] text-on-surface-variant mt-0.5">Perlu pemeliharaan berkala</div></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Rusak Berat</span><span class="p-2 rounded-lg bg-[#FEF2F2] text-[#B91C1C] material-symbols-outlined text-[20px]">cancel</span></div><div class="mt-3"><div class="text-xl font-bold text-[#B91C1C] font-mono">52 <span class="text-xs font-sans text-secondary font-medium">Unit</span></div><div class="text-[11px] text-on-surface-variant mt-0.5">Usulan penghapusan / lelang</div></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Pengadaan Pending</span><span class="p-2 rounded-lg bg-secondary-container/60 text-primary material-symbols-outlined text-[20px]">hourglass_top</span></div><div class="mt-3"><div class="text-xl font-bold text-primary font-mono">8 <span class="text-xs font-sans text-secondary font-medium">Pengajuan</span></div><div class="text-[11px] text-on-surface-variant mt-0.5">Menunggu verifikasi</div></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col justify-between"><div class="flex items-center justify-between"><span class="text-xs font-semibold text-secondary">Pemeliharaan Aktif</span><span class="p-2 rounded-lg bg-surface-container-high/40 text-secondary material-symbols-outlined text-[20px]">engineering</span></div><div class="mt-3"><div class="text-xl font-bold text-on-surface font-mono">14 <span class="text-xs font-sans text-secondary font-medium">Tiket</span></div><div class="text-[11px] text-on-surface-variant mt-0.5">Sedang dikerjakan teknisi</div></div></div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="p-4 rounded-xl bg-primary-container text-white shadow-sm flex items-start gap-4 transition-all hover:bg-[#254670] cursor-pointer"><div class="p-2.5 rounded-lg bg-white/10 text-white flex-shrink-0"><span class="material-symbols-outlined text-[24px]">add_shopping_cart</span></div><div class="flex flex-col"><span class="text-sm font-bold tracking-tight">Buat Pengajuan Pengadaan</span><p class="text-xs text-[#BACAE3] mt-0.5 leading-relaxed">Ajukan usulan rencana kebutuhan sarpras baru untuk unit kerja</p></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-start gap-4 transition-all hover:bg-surface-container-low cursor-pointer group"><div class="p-2.5 rounded-lg bg-surface-container-low text-primary flex-shrink-0 group-hover:bg-primary-container group-hover:text-white transition-colors"><span class="material-symbols-outlined text-[24px]">qr_code_scanner</span></div><div class="flex flex-col"><span class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Catat Aset Baru / Inventarisasi</span><p class="text-xs text-on-surface-variant mt-0.5 leading-relaxed">Pindai QR/Barcode atau input serial number aset baru</p></div></div><div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex items-start gap-4 transition-all hover:bg-surface-container-low cursor-pointer group"><div class="p-2.5 rounded-lg bg-surface-container-low text-primary flex-shrink-0 group-hover:bg-primary-container group-hover:text-white transition-colors"><span class="material-symbols-outlined text-[24px]">build</span></div><div class="flex flex-col"><span class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Lapor Pemeliharaan / Kerusakan</span><p class="text-xs text-on-surface-variant mt-0.5 leading-relaxed">Buat tiket servis perbaikan sarana prasarana</p></div></div></div><div class="rounded-xl bg-surface-container-lowest border border-surface-container shadow-xs flex flex-col overflow-hidden"><div class="p-5 border-b border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div class="flex flex-col"><h2 class="text-sm font-bold text-on-surface tracking-tight">Ringkasan Status Aset Terkini</h2><p class="text-xs text-on-surface-variant mt-0.5">Daftar inventaris sarpras yang diverifikasi dan dalam pemantauan operasional</p></div><div class="flex items-center gap-3 flex-wrap"><div class="inline-flex items-center bg-surface-container-low border border-surface-container rounded-lg p-0.5 text-xs"><button type="button" class="px-3 py-1 rounded-md font-semibold bg-surface-container-lowest text-primary shadow-xs">Semua</button><button type="button" class="px-3 py-1 rounded-md text-secondary hover:text-primary">Kondisi Baik</button><button type="button" class="px-3 py-1 rounded-md text-secondary hover:text-primary">Rusak Ringan</button><button type="button" class="px-3 py-1 rounded-md text-secondary hover:text-primary">Rusak Berat</button></div><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-2.5 text-[16px] text-secondary pointer-events-none">search</span><input type="text" placeholder="Cari kode / nama aset..." class="w-56 h-8 pl-8 pr-3 bg-surface-container-low border border-surface-container rounded-lg text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container"></div></div></div><div class="overflow-x-auto"><table class="w-full text-left text-xs border-collapse"><thead><tr class="bg-surface border-b border-surface-container text-secondary font-semibold"><th class="px-4 py-3 font-medium">Kode Inventaris</th><th class="px-4 py-3 font-medium">Nama Aset &amp; Spesifikasi</th><th class="px-4 py-3 font-medium">Lokasi / Ruangan</th><th class="px-4 py-3 font-medium">Kondisi</th><th class="px-4 py-3 font-medium">Cek Terakhir</th><th class="px-4 py-3 font-medium">Status Operasional</th><th class="px-4 py-3 text-right font-medium">Aksi</th></tr></thead><tbody class="divide-y divide-surface-container"><tr class="hover:bg-surface-container-low transition-colors"><td class="px-4 py-3 font-mono font-semibold text-primary">INV-ELK-2025-042</td><td class="px-4 py-3"><div class="font-semibold text-on-surface">Proyektor Laser Epson EB-L200F</div><div class="text-[11px] text-on-surface-variant">4,500 lumens, Full HD, Wireless</div></td><td class="px-4 py-3 text-on-surface-variant">R. Rapat Lt. 3</td><td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>Baik</span></td><td class="px-4 py-3 text-on-surface-variant font-mono">22 Feb 2025</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-secondary-container/50 text-on-secondary-container font-medium text-[11px]">Digunakan</span></td><td class="px-4 py-3 text-right"><div class="inline-flex items-center gap-1"><button type="button" title="Lihat Detail" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" title="Edit Aset" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr><tr class="hover:bg-surface-container-low transition-colors"><td class="px-4 py-3 font-mono font-semibold text-primary">INV-KOM-2024-118</td><td class="px-4 py-3"><div class="font-semibold text-on-surface">Laptop Lenovo ThinkPad T14 Gen 4</div><div class="text-[11px] text-on-surface-variant">Intel i7-1365U, 32GB RAM, 512GB SSD</div></td><td class="px-4 py-3 text-on-surface-variant">Lab Komputer 2</td><td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>Baik</span></td><td class="px-4 py-3 text-on-surface-variant font-mono">20 Feb 2025</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-secondary-container/50 text-on-secondary-container font-medium text-[11px]">Siap Digunakan</span></td><td class="px-4 py-3 text-right"><div class="inline-flex items-center gap-1"><button type="button" title="Lihat Detail" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" title="Edit Aset" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr><tr class="hover:bg-surface-container-low transition-colors"><td class="px-4 py-3 font-mono font-semibold text-primary">INV-FAC-2023-089</td><td class="px-4 py-3"><div class="font-semibold text-on-surface">AC Split Daikin Inverter 2 PK</div><div class="text-[11px] text-on-surface-variant">Model FTKC50TVM4, R32 Inverter</div></td><td class="px-4 py-3 text-on-surface-variant">Gedung Rektorat Lt. 2</td><td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FFFBEB] text-[#B45309] font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-[#D97706]"></span>Rusak Ringan</span></td><td class="px-4 py-3 text-on-surface-variant font-mono">18 Feb 2025</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-warning-bg text-warning-text font-medium text-[11px]">Sedang Diperbaiki</span></td><td class="px-4 py-3 text-right"><div class="inline-flex items-center gap-1"><button type="button" title="Lihat Detail" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" title="Edit Aset" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr><tr class="hover:bg-surface-container-low transition-colors"><td class="px-4 py-3 font-mono font-semibold text-primary">INV-MEC-2022-015</td><td class="px-4 py-3"><div class="font-semibold text-on-surface">Genset Silent Perkins 50 kVA</div><div class="text-[11px] text-on-surface-variant">Mesin 1103A-33TG1, Generator Stamford</div></td><td class="px-4 py-3 text-on-surface-variant">Ruang Utilitas Sentral</td><td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#047857] font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>Baik</span></td><td class="px-4 py-3 text-on-surface-variant font-mono">15 Feb 2025</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-secondary-container/50 text-on-secondary-container font-medium text-[11px]">Siaga / Standby</span></td><td class="px-4 py-3 text-right"><div class="inline-flex items-center gap-1"><button type="button" title="Lihat Detail" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" title="Edit Aset" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr><tr class="hover:bg-surface-container-low transition-colors"><td class="px-4 py-3 font-mono font-semibold text-primary">INV-ELK-2021-008</td><td class="px-4 py-3"><div class="font-semibold text-on-surface">Server Rackmount Dell PowerEdge R440</div><div class="text-[11px] text-on-surface-variant">Dual Xeon Silver, Motherboard failure</div></td><td class="px-4 py-3 text-on-surface-variant">Ruang Server Barat</td><td class="px-4 py-3"><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FEF2F2] text-[#B91C1C] font-semibold text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-[#DC2626]"></span>Rusak Berat</span></td><td class="px-4 py-3 text-on-surface-variant font-mono">10 Feb 2025</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-danger-bg text-danger-text font-medium text-[11px]">Usul Penghapusan</span></td><td class="px-4 py-3 text-right"><div class="inline-flex items-center gap-1"><button type="button" title="Lihat Detail" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button type="button" title="Edit Aset" class="p-1 text-secondary hover:text-primary hover:bg-surface-container-low rounded"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr></tbody></table></div><div class="px-5 py-3 border-t border-surface-container flex items-center justify-between text-xs text-secondary"><span class="text-[11px]">Menampilkan <strong class="text-on-surface font-semibold">1 - 5</strong> dari <strong class="text-on-surface font-semibold">1.842</strong> aset</span><div class="flex items-center gap-1"><button type="button" class="px-2.5 py-1 border border-surface-container rounded bg-surface-container-lowest text-secondary hover:bg-surface-container-low disabled:opacity-50 text-[11px]" disabled="">Sebelumnya</button><button type="button" class="px-2.5 py-1 border border-surface-container rounded bg-primary-container text-white font-semibold text-[11px]">1</button><button type="button" class="px-2.5 py-1 border border-surface-container rounded bg-surface-container-lowest text-secondary hover:bg-surface-container-low text-[11px]">2</button><button type="button" class="px-2.5 py-1 border border-surface-container rounded bg-surface-container-lowest text-secondary hover:bg-surface-container-low text-[11px]">3</button><button type="button" class="px-2.5 py-1 border border-surface-container rounded bg-surface-container-lowest text-secondary hover:bg-surface-container-low text-[11px]">Berikutnya</button></div></div></div><footer class="pt-5 pb-2 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-secondary text-xs"><div class="flex items-center gap-2"><span class="font-bold text-primary">SARPRA</span><span class="">•</span><span class="">Sistem Terpadu Pengelolaan Sarana dan Prasarana</span></div><div class="flex items-center gap-3"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Operasional Aktif</span><span class="">•</span><span class="">Hak Cipta © 2025</span></div></footer></main>
+  </div>
+
+  <script>
+    (function() {
+      const filterButtons = document.querySelectorAll('#time-filter-group .filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+            b.classList.add('text-secondary', 'font-medium');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+          btn.classList.remove('text-secondary', 'font-medium');
+        });
+      });
+
+      const refreshBtn = document.getElementById('refresh-data-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshBtn && refreshIcon) {
+        refreshBtn.addEventListener('click', () => {
+          refreshIcon.classList.add('rotate-180');
+          refreshBtn.classList.add('opacity-75');
+          setTimeout(() => {
+            refreshIcon.classList.remove('rotate-180');
+            refreshBtn.classList.remove('opacity-75');
+          }, 500);
+        });
+      }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+</body></html>

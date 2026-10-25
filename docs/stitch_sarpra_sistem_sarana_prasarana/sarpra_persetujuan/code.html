@@ -1,0 +1,670 @@
+<!DOCTYPE html><html lang="id" style="width: 1336px; height: 587px; overflow: hidden; position: relative;"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>SARPRA - Dashboard Administratif Konsol Pusat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#022448',
+            'primary-container': '#1E3A5F',
+            'on-primary': '#FFFFFF',
+            'on-primary-container': '#8AA4CF',
+            secondary: '#515F74',
+            'secondary-container': '#D5E3FC',
+            'on-secondary-container': '#57657A',
+            surface: '#F8FAFC',
+            'surface-container-lowest': '#FFFFFF',
+            'surface-container-low': '#F1F5F9',
+            'surface-container': '#E2E8F0',
+            'surface-container-high': '#CBD5E1',
+            'on-surface': '#0F172A',
+            'on-surface-variant': '#475569',
+            outline: '#94A3B8',
+            'outline-variant': '#E2E8F0',
+            success: '#059669',
+            'success-bg': '#ECFDF5',
+            'success-text': '#047857',
+            warning: '#D97706',
+            'warning-bg': '#FFFBEB',
+            'warning-text': '#B45309',
+            danger: '#DC2626',
+            'danger-bg': '#FEF2F2',
+            'danger-text': '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0F172A;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-surface antialiased flex min-h-screen">
+
+  <!-- SIDEBAR PERSISTEN (260px) -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-primary-container z-50 flex flex-col justify-between shadow-lg text-white">
+    <div class="flex flex-col">
+      <!-- Logo & Brand Header -->
+      <div class="h-16 px-6 flex items-center gap-3 border-b border-[#2d4d7a]/50">
+        <img alt="SARPRA Logo" class="w-8 h-8 rounded-lg object-contain shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWuSsIW90C8IrRsEnI0zM--Lj-YLfw5Kns1NQ8ugKG0fpmAqKKZnNZC1XIXSAp1lvlv3ywkAWYYZvtAg1QufirV6-0cnRg5DxmPJHGr2sVDVCO4gsXy_ljE225RiIdp2b0TvRtdl-vVo6c8qMvHCnI1BgvuKDU3eGhx_jtY0Hn__jhUF2NyFomqGmfSSR2G6pmDL_29ucZN8dqOse-OCbDH5HQaJ7rupeMZSideV3PjbWRTJS8Y8u8u9r65D4U3nxyQ">
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg text-white tracking-tight leading-none">SARPRA</span>
+          <span class="text-[11px] font-semibold text-[#8AA4CF] tracking-wider uppercase mt-1">Asset &amp; Infra</span>
+        </div>
+      </div>
+
+      <!-- Menu Category Label -->
+      <div class="px-6 pt-6 pb-2">
+        <span class="text-[11px] font-bold text-[#8AA4CF] uppercase tracking-wider">Modul Operasional</span>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="flex flex-col gap-1 px-3"><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="text-sm">Dashboard</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#022448] text-white font-semibold shadow-sm transition-all"><span class="material-symbols-outlined text-[20px] text-white">assignment_turned_in</span><span class="text-sm">Pengadaan &amp; Persetujuan</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="text-sm">Monitoring Aset</span></a><a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#BACAE3] hover:bg-[#254670] hover:text-white transition-all"><span class="material-symbols-outlined text-[20px]">summarize</span><span class="text-sm">Pelaporan</span></a></nav>
+    </div>
+
+    <!-- System Badge / Footer -->
+    <div class="p-4 mx-3 mb-4 rounded-xl bg-[#022448]/80 border border-[#2c4e78]">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs text-white font-bold tracking-tight">SARPRA v1.0</span>
+        
+      </div>
+      <p class="text-[11px] text-[#8AA4CF] leading-relaxed">Sistem Pengelolaan Sarana dan Prasarana Terpadu</p>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA (Offset by 256px for sidebar) -->
+  <div class="pl-64 flex-1 flex flex-col min-w-0">
+
+    <!-- TOP HEADER BAR -->
+    <header class="sticky top-0 right-0 h-16 bg-surface-container-lowest z-40 flex items-center justify-between px-8 border-b border-surface-container shadow-sm">
+      <div class="flex items-center gap-3">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs font-medium text-secondary"><span class="font-bold text-primary">SARPRA</span><span class="text-outline">/</span><span class="text-on-surface-variant font-medium">Pimpinan</span><span class="text-outline">/</span><span class="text-primary font-bold bg-secondary-container/60 px-2 py-0.5 rounded">Pengadaan &amp; Persetujuan</span></nav>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <!-- Global Search Bar -->
+        
+
+        <!-- Notification & Help Buttons -->
+        <div class="flex items-center gap-1 border-r border-surface-container pr-4">
+          <button type="button" aria-label="Notifications" class="relative p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-white font-mono text-[9px] font-bold">3</span>
+          </button>
+          <button type="button" aria-label="Help" class="p-2 text-secondary hover:text-primary hover:bg-surface-container-low rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[20px]">help_outline</span>
+          </button>
+        </div>
+
+        <!-- Admin Profile Profile -->
+        <div class="flex items-center gap-3 cursor-pointer group"><img alt="Dr. Ir. H. Hendra Setiawan, M.T." class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-container/20 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpGapfe9YVt8Swer47jo7GNYEz--IvvsAIaL1DcZyMTO4Mogf61_VRxzzMCy5KFN0dvxOaEeJz6f1IgPO8MeH-An3WpRqpbKJBFSL7LFSA7jvb5zo6bHPI8SCXd8wSH2lbtLmQfWezhbYFTjohn0bLKtK0Ra5TaS9ktX6x3YH9Hd0E6ibSVWcZIrHwvzQq5YWoIL89mZ0Rh7bMaH8qQtr32kXyQowCB-AdtCIkjWyHxfMvbdCgU91qHS9uIuHPvPqF0g"><div class="flex flex-col text-left"><span class="text-xs font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">Dr. Ir. H. Hendra Setiawan, M.T.</span><div class="flex items-center gap-1 mt-0.5"><span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-mono text-[10px] font-bold border border-emerald-600/20">Pimpinan / PPK</span></div></div><span class="material-symbols-outlined text-[18px] text-secondary group-hover:text-primary transition-colors">keyboard_arrow_down</span></div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="w-full px-8 py-7 flex flex-col gap-6"><!-- Header & Summary Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-surface-container"><div>
+    <div class="flex items-center gap-2.5">
+      <span class="material-symbols-outlined text-primary text-[28px]">verified_user</span>
+      <h1 class="text-xl font-extrabold text-on-surface tracking-tight">Persetujuan Pengadaan</h1>
+      <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-300">4 Menunggu Keputusan</span>
+    </div>
+    <p class="text-xs text-secondary mt-1 leading-relaxed">Tinjau dan berikan persetujuan untuk permohonan pengadaan sarana dan prasarana.</p>
+  </div>
+  <div class="flex items-center gap-2.5">
+    <button type="button" onclick="openKonfirmasiModal('PGD-2025-014', 'Pengadaan Laptop High-End &amp; Workstation GIS', 'Siti Rahmawati, S.T. - Subbag Rumah Tangga &amp; Sarpras', 'Rp 24.500.000', 'Prioritas Tinggi: Mendesak untuk percepatan digitasi pemetaan aset kampus.')" class="px-3.5 py-2 rounded-lg bg-primary hover:bg-[#1E3A5F] text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all">
+      <span class="material-symbols-outlined text-[18px]">rate_review</span>
+      <span class="">Tinjau Usulan Utama</span>
+    </button>
+  </div></div>
+
+<!-- 4 KPI Summary Metric Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"><div class="bg-surface-container-lowest border border-amber-200/80 rounded-xl p-4 shadow-xs relative overflow-hidden">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-semibold text-secondary">Usulan Menunggu</span>
+      <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+        <span class="material-symbols-outlined text-[20px]">pending_actions</span>
+      </div>
+    </div>
+    <div class="mt-3 flex items-baseline gap-2">
+      <span class="text-2xl font-extrabold text-on-surface font-mono">4</span>
+      <span class="text-[11px] text-amber-700 font-medium font-mono">Permohonan</span>
+    </div>
+    <div class="mt-1 text-[11px] text-secondary flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Perlu persetujuan
+    </div>
+  </div>
+
+  <div class="bg-surface-container-lowest border border-emerald-200/80 rounded-xl p-4 shadow-xs relative overflow-hidden">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-semibold text-secondary">Disetujui Bulan Ini</span>
+      <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center">
+        <span class="material-symbols-outlined text-[20px]">task_alt</span>
+      </div>
+    </div>
+    <div class="mt-3 flex items-baseline gap-2">
+      <span class="text-2xl font-extrabold text-emerald-700 font-mono">18</span>
+      <span class="text-[11px] text-emerald-700 font-medium font-mono">Permohonan</span>
+    </div>
+    <div class="mt-1 text-[11px] text-secondary flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Disetujui
+    </div>
+  </div>
+
+  <div class="bg-surface-container-lowest border border-rose-200/80 rounded-xl p-4 shadow-xs relative overflow-hidden">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-semibold text-secondary">Ditolak / Revisi</span>
+      <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center">
+        <span class="material-symbols-outlined text-[20px]">rule_folder</span>
+      </div>
+    </div>
+    <div class="mt-3 flex items-baseline gap-2">
+      <span class="text-2xl font-extrabold text-rose-700 font-mono">2</span>
+      <span class="text-[11px] text-rose-700 font-medium font-mono">Permohonan</span>
+    </div>
+    <div class="mt-1 text-[11px] text-secondary flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Perlu revisi
+    </div>
+  </div>
+
+  <div class="bg-surface-container-lowest border border-surface-container rounded-xl p-4 shadow-xs relative overflow-hidden">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-semibold text-secondary">Total Anggaran Diajukan</span>
+      <div class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-[20px]">payments</span>
+      </div>
+    </div>
+    <div class="mt-3 flex items-baseline gap-2">
+      <span class="text-xl font-extrabold text-primary font-mono">Rp 148,2 Jt</span>
+    </div>
+    <div class="mt-1 text-[11px] text-secondary flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Total estimasi biaya
+    </div>
+  </div></div>
+
+<!-- Data Table of Procurement Submissions -->
+<div class="bg-surface-container-lowest border border-surface-container rounded-xl shadow-xs overflow-hidden">
+  <div class="px-6 py-4 border-b border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-container-low/40">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[20px]">table_chart</span>
+      <h2 class="text-sm font-bold text-on-surface">Daftar Pengajuan Pengadaan Menunggu Persetujuan</h2>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-xs text-secondary">Penyortiran:</span>
+      <span class="px-2.5 py-1 text-xs font-semibold bg-surface-container-lowest border border-surface-container rounded-lg text-primary">Prioritas Tertinggi</span>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr class="bg-surface-container-low/60 text-secondary uppercase tracking-wider text-[11px] font-semibold border-b border-surface-container">
+          <th class="py-3 px-4">No. Pengadaan</th>
+          <th class="py-3 px-4">Tanggal Usulan</th>
+          <th class="py-3 px-4">Pengaju &amp; Unit Kerja</th>
+          <th class="py-3 px-4">Nama Paket &amp; Lingkup</th>
+          <th class="py-3 px-4">Prioritas</th>
+          <th class="py-3 px-4 text-right">Total Estimasi Biaya</th>
+          <th class="py-3 px-4 text-center">Status</th>
+          <th class="py-3 px-4 text-center">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-surface-container text-on-surface">
+        <tr class="hover:bg-surface-container-low/50 transition-colors" id="row-pgd-2025-014">
+          <td class="py-3.5 px-4 font-mono font-bold text-primary">PGD-2025-014</td>
+          <td class="py-3.5 px-4 text-secondary">24 Okt 2025</td>
+          <td class="py-3.5 px-4">
+            <p class="font-semibold text-on-surface">Siti Rahmawati, S.T.</p>
+            <p class="text-[11px] text-secondary">Subbag Rumah Tangga &amp; Sarpras</p>
+          </td>
+          <td class="py-3.5 px-4 max-w-xs">
+            <p class="font-semibold text-on-surface">Laptop High-End &amp; Workstation GIS</p>
+            <p class="text-[11px] text-secondary truncate">2 Unit Workstation Spesifikasi Desain &amp; GIS Pemetaan</p>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Tinggi</span>
+          </td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-700 text-sm">
+            Rp 24.500.000
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">Menunggu Persetujuan</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button type="button" onclick="openKonfirmasiModal('PGD-2025-014', 'Laptop High-End &amp; Workstation GIS', 'Siti Rahmawati, S.T. - Subbag Rumah Tangga &amp; Sarpras', 'Rp 24.500.000', '2 Unit Workstation Spesifikasi Desain &amp; GIS Pemetaan untuk Laboratorium Perencanaan.')" class="px-3 py-1.5 rounded-lg bg-primary hover:bg-[#1E3A5F] text-white font-semibold flex items-center gap-1 mx-auto text-xs transition-all shadow-xs">
+              <span class="material-symbols-outlined text-[16px]">gavel</span>
+              <span class="">Tinjau &amp; Otorisasi</span>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="hover:bg-surface-container-low/50 transition-colors" id="row-pgd-2025-015">
+          <td class="py-3.5 px-4 font-mono font-bold text-primary">PGD-2025-015</td>
+          <td class="py-3.5 px-4 text-secondary">23 Okt 2025</td>
+          <td class="py-3.5 px-4">
+            <p class="font-semibold text-on-surface">Ahmad Fauzan, M.Kom.</p>
+            <p class="text-[11px] text-secondary">Pusat Data &amp; Jaringan TI</p>
+          </td>
+          <td class="py-3.5 px-4 max-w-xs">
+            <p class="font-semibold text-on-surface">Upgrade Switch Core &amp; Kabel Fiber Optik</p>
+            <p class="text-[11px] text-secondary truncate">Backbone Gedung Rektorat dan Gedung Kuliah Bersama</p>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Tinggi</span>
+          </td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-700 text-sm">
+            Rp 68.200.000
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">Menunggu Persetujuan</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button type="button" onclick="openKonfirmasiModal('PGD-2025-015', 'Upgrade Switch Core &amp; Kabel Fiber Optik', 'Ahmad Fauzan, M.Kom. - Pusat Data &amp; Jaringan TI', 'Rp 68.200.000', 'Penyediaan 2 unit Switch L3 48-Port PoE+ beserta penarikan serat optik 12 core antar gedung.')" class="px-3 py-1.5 rounded-lg bg-primary hover:bg-[#1E3A5F] text-white font-semibold flex items-center gap-1 mx-auto text-xs transition-all shadow-xs">
+              <span class="material-symbols-outlined text-[16px]">gavel</span>
+              <span class="">Tinjau &amp; Otorisasi</span>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="hover:bg-surface-container-low/50 transition-colors" id="row-pgd-2025-016">
+          <td class="py-3.5 px-4 font-mono font-bold text-primary">PGD-2025-016</td>
+          <td class="py-3.5 px-4 text-secondary">22 Okt 2025</td>
+          <td class="py-3.5 px-4">
+            <p class="font-semibold text-on-surface">drg. Ratna Kusuma</p>
+            <p class="text-[11px] text-secondary">Klinik Kesehatan Mahasiswa</p>
+          </td>
+          <td class="py-3.5 px-4 max-w-xs">
+            <p class="font-semibold text-on-surface">Alat Sterilisasi Autoclave &amp; Medis</p>
+            <p class="text-[11px] text-secondary truncate">Penggantian unit sterilisasi ruang tindakan poli gigi</p>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">Sedang</span>
+          </td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-700 text-sm">
+            Rp 18.750.000
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">Menunggu Persetujuan</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button type="button" onclick="openKonfirmasiModal('PGD-2025-016', 'Alat Sterilisasi Autoclave &amp; Medis', 'drg. Ratna Kusuma - Klinik Kesehatan Mahasiswa', 'Rp 18.750.000', '1 Unit Autoclave Digital Class B kapasitas 24 Liter standar akreditasi klinik pratama.')" class="px-3 py-1.5 rounded-lg bg-primary hover:bg-[#1E3A5F] text-white font-semibold flex items-center gap-1 mx-auto text-xs transition-all shadow-xs">
+              <span class="material-symbols-outlined text-[16px]">gavel</span>
+              <span class="">Tinjau &amp; Otorisasi</span>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="hover:bg-surface-container-low/50 transition-colors" id="row-pgd-2025-017">
+          <td class="py-3.5 px-4 font-mono font-bold text-primary">PGD-2025-017</td>
+          <td class="py-3.5 px-4 text-secondary">21 Okt 2025</td>
+          <td class="py-3.5 px-4">
+            <p class="font-semibold text-on-surface">Drs. H. Mulyadi</p>
+            <p class="text-[11px] text-secondary">Biro Sarana Olahraga &amp; Seni</p>
+          </td>
+          <td class="py-3.5 px-4 max-w-xs">
+            <p class="font-semibold text-on-surface">Peremajaan Sound System &amp; Mic Wireless Hall</p>
+            <p class="text-[11px] text-secondary truncate">Peralatan audio auditorium utama lantai 3</p>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">Rendah</span>
+          </td>
+          <td class="py-3.5 px-4 text-right font-mono font-bold text-emerald-700 text-sm">
+            Rp 36.750.000
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-300">Menunggu Persetujuan</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button type="button" onclick="openKonfirmasiModal('PGD-2025-017', 'Peremajaan Sound System &amp; Mic Wireless Hall', 'Drs. H. Mulyadi - Biro Sarana Olahraga &amp; Seni', 'Rp 36.750.000', '1 Paket Digital Audio Mixer 16-Ch, 4 Unit Wireless Handheld Microphone UHF, dan 2 Speaker Aktif.')" class="px-3 py-1.5 rounded-lg bg-primary hover:bg-[#1E3A5F] text-white font-semibold flex items-center gap-1 mx-auto text-xs transition-all shadow-xs">
+              <span class="material-symbols-outlined text-[16px]">gavel</span>
+              <span class="">Tinjau &amp; Otorisasi</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="px-6 py-3 border-t border-surface-container flex items-center justify-between text-xs text-secondary bg-surface-container-low/20">
+    <span class="">Menampilkan 4 dari 4 usulan pengadaan aktif</span>
+    <span class="font-medium">4 permohonan aktif memerlukan keputusan</span>
+  </div>
+</div>
+
+<!-- Interactive Confirmation Modal (#modalKonfirmasiPersetujuan) -->
+<div id="modalKonfirmasiPersetujuan" class="fixed inset-0 z-50 bg-[#022448]/70 backdrop-blur-xs items-center justify-center p-4 overflow-y-auto hidden">
+  <div class="bg-surface-container-lowest rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-surface-container flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200 my-auto"><div class="flex items-start justify-between border-b border-surface-container pb-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-xs">
+          <span class="material-symbols-outlined text-[24px]">gavel</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-base font-bold text-on-surface">Konfirmasi Persetujuan Pengadaan</h3>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">Menunggu Persetujuan</span>
+          </div>
+          <p class="text-xs text-secondary mt-0.5">Tinjau detail permohonan pengadaan sarana dan prasarana.</p>
+        </div>
+      </div>
+      <button type="button" onclick="closeKonfirmasiModal()" class="p-1.5 text-secondary hover:text-primary rounded-lg hover:bg-surface-container-low transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Detail Summary Card -->
+    <div class="bg-surface-container-low/60 rounded-xl p-4 border border-surface-container grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+      <div>
+        <span class="text-secondary font-medium text-[11px]">Nomor &amp; Tanggal Pengajuan:</span>
+        <p class="font-mono font-bold text-primary text-sm mt-0.5" id="konfirmasi-nomor">PGD-2025-014 <span class="text-secondary font-sans text-xs font-normal">• 24 Okt 2025</span></p>
+      </div>
+      <div>
+        <span class="text-secondary font-medium text-[11px]">Estimasi Biaya:</span>
+        <p class="font-mono font-bold text-emerald-700 text-base mt-0.5" id="konfirmasi-biaya">Rp 24.500.000</p>
+      </div>
+      <div class="sm:col-span-2">
+        <span class="text-secondary font-medium text-[11px]">Pengaju &amp; Unit Kerja:</span>
+        <p class="font-semibold text-on-surface mt-0.5" id="konfirmasi-pengaju">Siti Rahmawati, S.T. • Subbag Rumah Tangga &amp; Sarpras</p>
+      </div>
+      <div class="sm:col-span-2">
+        <span class="text-secondary font-medium text-[11px]">Nama Barang &amp; Spesifikasi:</span>
+        <p class="font-semibold text-on-surface mt-0.5 leading-relaxed" id="konfirmasi-paket">Laptop High-End &amp; Workstation GIS - 2 Unit Workstation Spesifikasi Desain &amp; GIS Pemetaan</p>
+      </div>
+      <div>
+        <span class="text-secondary font-medium text-[11px]">Jumlah Unit:</span>
+        <p class="font-semibold text-on-surface mt-0.5">2 Unit</p>
+      </div>
+      <div>
+        <span class="text-secondary font-medium text-[11px]">Tingkat Prioritas:</span>
+        <p class="mt-0.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Tinggi</span></p>
+      </div>
+      <div class="sm:col-span-2">
+        <span class="text-secondary font-medium text-[11px]">Alasan Pengadaan:</span>
+        <p class="text-on-surface-variant mt-0.5 leading-relaxed">Kebutuhan mendesak pengolahan pemetaan digital dan inventarisasi spasial sarpras yang tidak dapat ditangani laptop standar.</p>
+      </div>
+    </div>
+
+    <!-- Streamlined Timeline / Audit Trail Log -->
+    <div class="border border-surface-container rounded-xl p-4 bg-surface-container-lowest">
+      <div class="flex items-center gap-1.5 mb-3">
+        <span class="material-symbols-outlined text-primary text-[18px]">timeline</span>
+        <h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">Alur &amp; Riwayat Persetujuan</h4>
+      </div>
+      <div class="space-y-3 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container">
+        <div class="flex items-start gap-3 relative">
+          <div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 z-10 text-[14px]">
+            <span class="material-symbols-outlined text-[14px]">check</span>
+          </div>
+          <div class="flex-1 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-on-surface">Diajukan</span>
+              <span class="text-[11px] font-mono text-secondary">24 Okt 2025, 08:30 WIB</span>
+            </div>
+            <p class="text-[11px] text-secondary mt-0.5">Permohonan pengadaan dibuat oleh pengaju unit kerja.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 relative">
+          <div class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center shrink-0 z-10 text-[14px] animate-pulse">
+            <span class="material-symbols-outlined text-[14px]">pending</span>
+          </div>
+          <div class="flex-1 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-800">Menunggu Persetujuan (Status Saat Ini)</span>
+              <span class="text-[11px] font-mono text-amber-700 font-semibold">Saat ini</span>
+            </div>
+            <p class="text-[11px] text-secondary mt-0.5">Menunggu keputusan dari Pimpinan.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 relative">
+          <div class="w-6 h-6 rounded-full bg-slate-100 text-secondary border border-surface-container flex items-center justify-center shrink-0 z-10 text-[14px]">
+            <span class="material-symbols-outlined text-[14px]">assignment_turned_in</span>
+          </div>
+          <div class="flex-1 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-medium text-secondary">Keputusan Pimpinan</span>
+              <span class="text-[11px] font-mono text-outline">Tahap Berikutnya</span>
+            </div>
+            <p class="text-[11px] text-secondary mt-0.5">Disetujui atau ditolak beserta catatan keputusan yang akan tersimpan otomatis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Catatan & Alasan Keputusan -->
+    <div class="space-y-1.5">
+      <div class="flex items-center justify-between">
+        <label for="catatan-ppk" class="text-xs font-bold text-on-surface flex items-center gap-1">
+          <span class="">Catatan / Alasan Keputusan:</span>
+        </label>
+        <span id="char-counter" class="text-[11px] font-mono text-secondary">0 / 300 karakter</span>
+      </div>
+      <textarea id="catatan-ppk" rows="2" maxlength="300" oninput="updateCharCount(this)" placeholder="Tuliskan catatan persetujuan atau alasan jika permohonan ditolak..." class="w-full p-3 rounded-lg border border-surface-container bg-surface-container-low text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all"></textarea>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-3 pt-3 border-t border-surface-container">
+      <button type="button" onclick="closeKonfirmasiModal()" class="w-full sm:w-auto px-4 py-2 rounded-lg border border-surface-container text-secondary font-semibold hover:bg-surface-container-low transition-colors text-xs text-center">
+        Batal
+      </button>
+      <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+        <button type="button" onclick="eksekusiPersetujuan('reject')" class="flex-1 sm:flex-initial px-4 py-2 rounded-lg bg-[#DC2626] hover:bg-red-700 text-white font-semibold transition-colors text-xs flex items-center justify-center gap-1.5 shadow-xs">
+          <span class="material-symbols-outlined text-[16px]">cancel</span>
+          <span class="">Tolak</span>
+        </button>
+        <button type="button" onclick="eksekusiPersetujuan('approve')" class="flex-1 sm:flex-initial px-5 py-2 rounded-lg bg-[#16A34A] hover:bg-emerald-700 text-white font-bold transition-colors text-xs flex items-center justify-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-[16px]">check_circle</span>
+          <span class="">Setujui</span>
+        </button>
+      </div>
+    </div></div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div><script>
+  function openKonfirmasiModal(nomor, paket, pengaju, biaya, ringkasan) {
+    const modal = document.getElementById('modalKonfirmasiPersetujuan');
+    if (!modal) return;
+    if (nomor) document.getElementById('konfirmasi-nomor').textContent = nomor;
+    if (biaya) document.getElementById('konfirmasi-biaya').textContent = biaya;
+    if (pengaju) document.getElementById('konfirmasi-pengaju').textContent = pengaju;
+    if (paket) document.getElementById('konfirmasi-paket').textContent = paket;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeKonfirmasiModal() {
+    const modal = document.getElementById('modalKonfirmasiPersetujuan');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function updateCharCount(textarea) {
+    const counter = document.getElementById('char-counter');
+    if (counter) {
+      counter.textContent = `${textarea.value.length} / 300 karakter`;
+    }
+  }
+
+  function eksekusiPersetujuan(status) {
+    const nomor = document.getElementById('konfirmasi-nomor')?.textContent || 'PGD';
+    const paket = document.getElementById('konfirmasi-paket')?.textContent || 'Pengadaan';
+    closeKonfirmasiModal();
+    handleDecision(status, nomor, paket);
+  }
+</script>
+
+<footer class="pt-5 pb-2 border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-3 text-secondary text-xs">
+  <div class="flex items-center gap-2">
+    <span class="font-bold text-primary">SARPRA</span>
+    <span class="">•</span>
+    <span class="">Sistem Terpadu Pengelolaan Sarana dan Prasarana</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Operasional Aktif</span>
+    <span class="">•</span>
+    <span class="">Hak Cipta © 2025</span>
+  </div>
+</footer></main>
+  </div>
+
+  <script>
+    (function() {
+      const filterButtons = document.querySelectorAll('#time-filter-group .filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+            b.classList.add('text-secondary', 'font-medium');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-xs', 'font-bold');
+          btn.classList.remove('text-secondary', 'font-medium');
+        });
+      });
+
+      const refreshBtn = document.getElementById('refresh-data-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      if (refreshBtn && refreshIcon) {
+        refreshBtn.addEventListener('click', () => {
+          refreshIcon.classList.add('rotate-180');
+          refreshBtn.classList.add('opacity-75');
+          setTimeout(() => {
+            refreshIcon.classList.remove('rotate-180');
+            refreshBtn.classList.remove('opacity-75');
+          }, 500);
+        });
+      }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-rose-600';
+    const icon = type === 'success' ? 'check_circle' : 'cancel';
+    toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl text-white shadow-xl pointer-events-auto text-xs font-semibold ${bgColor} transition-all duration-300 transform translate-y-2 opacity-0`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-[18px]">${icon}</span><span>${message}</span>`;
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.classList.remove('translate-y-2', 'opacity-0');
+    }, 20);
+    
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-2');
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  }
+
+  function handleDecision(type, id, title) {
+    const row = document.getElementById(`row-${id.toLowerCase()}`);
+    if (type === 'approve') {
+      showToast(`Berhasil menyetujui usulan ${id}: "${title}". Dokumen diteruskan ke Pejabat Pengadaan.`, 'success');
+    } else {
+      showToast(`Usulan ${id}: "${title}" telah ditolak dan dikembalikan ke pengaju untuk revisi.`, 'danger');
+    }
+    if (row) {
+      row.style.transition = 'all 0.4s ease';
+      row.style.opacity = '0.4';
+      row.style.background = type === 'approve' ? '#ecfdf5' : '#fef2f2';
+      const actionCell = row.querySelector('td:last-child');
+      if (actionCell) {
+        actionCell.innerHTML = type === 'approve' 
+          ? '<span class="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg text-xs"><span class="material-symbols-outlined text-[16px]">verified</span>Disetujui</span>'
+          : '<span class="inline-flex items-center gap-1 font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-lg text-xs"><span class="material-symbols-outlined text-[16px]">cancel</span>Ditolak</span>';
+      }
+    }
+  }
+
+  function openDetailModal(id, paket, pengaju, biaya, catatan) {
+    document.getElementById('modal-nomor').textContent = id;
+    document.getElementById('modal-paket').textContent = paket;
+    document.getElementById('modal-pengaju').textContent = pengaju;
+    document.getElementById('modal-biaya').textContent = biaya;
+    document.getElementById('modal-catatan').textContent = catatan;
+    
+    const approveBtn = document.getElementById('modal-approve-btn');
+    approveBtn.onclick = function() {
+      closeDetailModal();
+      handleDecision('approve', id, paket);
+    };
+    
+    const modal = document.getElementById('detail-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeDetailModal() {
+    const modal = document.getElementById('detail-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  document.getElementById('export-btn')?.addEventListener('click', () => {
+    showToast('Menyiapkan berkas Ringkasan Eksekutif PDF... Unduhan segera dimulai.', 'success');
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
